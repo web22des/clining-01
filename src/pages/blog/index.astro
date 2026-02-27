@@ -1,0 +1,97 @@
+---
+import { Image } from "astro:assets";
+import { getCollection } from "astro:content";
+
+import PagesLayout from "@layouts/PagesLayout.astro";
+import Link from "@components/ui/Link.astro";
+
+// сортировка постов по дате публикации - от новых к старым
+const posts = (await getCollection("blog")).sort(
+    (a, b) => b.data.pubDate.valueOf() - a.data.pubDate.valueOf()
+);
+---
+
+<PagesLayout>
+    <div class="wrap__container">
+        <h1>Список постов</h1>
+        <p>Сортировка по дате</p>
+
+        <ul class="grup-content">
+            {
+                posts.map((post) => (
+                    <li class="card">
+                        <div class="card__body">
+                            <h3 class="card__title">{post.data.title}</h3>
+                            <Image
+                                class="_ibg"
+                                src={post.data.heroImage!}
+                                alt={post.data.alt}
+                                width={300}
+                            />
+                            <div class="card__content">
+                                <p>
+                                    <span>Дата публикации:</span>{" "}
+                                    {post.data.pubDate.toLocaleDateString()}
+                                </p>
+                                <p class="card__description">
+                                    {post.data.description}
+                                </p>
+                            </div>
+                        </div>
+                        <div class="card__footer">
+                            <Link
+                                class="button button--filled"
+                                href={`/blog/${post.id}`}
+                            >
+                                Подробнее
+                            </Link>
+                        </div>
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</PagesLayout>
+
+<style lang="scss">
+    @use "@styles/base/media-new.scss" as *;
+    @use "@styles/base/variables.scss" as *;
+    .grup-content {
+        @media (min-width: $tablet-small) {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: var(--space-grid-gap);
+        }
+
+        //1023px и более
+        @media (min-width: $tablet-medium) {
+            grid-template-columns: repeat(3, 1fr);
+        }
+    }
+
+    .card {
+        //border: 1px solid #c0bcbc;
+        padding: var(--space-all-card);
+        border-radius: var(--border-radius-medium);
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        box-shadow: var(--box-shadow-Light-03);
+
+        &__title {
+            font-size: var(--font-size-headline-medium);
+        }
+
+        &__body {
+            align-items: stretch;
+
+            img {
+                margin-bottom: var(--space-md);
+            }
+        }
+
+        &__content {
+            margin-bottom: var(--space-md);
+        }
+    }
+</style>

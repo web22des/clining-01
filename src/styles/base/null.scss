@@ -1,0 +1,103 @@
+*,
+*::before,
+*::after {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+}
+
+/* Для всех интерактивных элементов */
+// Раскоментировать если не используется отдельный файл src\styles\utils\_focus-visible.s   css
+//
+// button:focus-visible,
+// a:focus-visible,
+// input:focus-visible {
+//     outline: 2px solid var(--md-sys-color-error-container);
+//     box-shadow: 0 0 0 2px #4a90e2;
+// }
+
+html {
+    scroll-behavior: smooth; /* Глобальный плавный скролл */
+}
+
+body {
+    text-size-adjust: 100%;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+a,
+input,
+button,
+textarea {
+    font-size: inherit;
+    color: inherit;
+}
+
+button {
+    cursor: pointer;
+    background-color: inherit;
+}
+
+/* Сброс границ для всех элементов форм */
+form,
+fieldset,
+input,
+textarea,
+select,
+button,
+[type="button"],
+[type="reset"],
+[type="submit"] {
+    border: none; /* Полное удаление границы */
+    outline: none; /* Убираем фокус-рамку */
+    box-shadow: none; /* На всякий случай сбрасываем тени */
+}
+
+/* Специально для текстовых полей ввода */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="search"],
+input[type="tel"],
+input[type="url"],
+textarea {
+    -webkit-appearance: none; /* Важно для Safari/iOS */
+    -moz-appearance: none; /* Для Firefox */
+    appearance: none;
+    background-clip: padding-box; /* Фикс фона в некоторых браузерах */
+}
+
+a:link,
+a:visited {
+    text-decoration: none;
+}
+
+a:hover {
+    text-decoration: none;
+}
+
+ul li {
+    list-style: none;
+}
+
+img {
+    vertical-align: top;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+    font-weight: inherit;
+    font-size: inherit;
+}
+
+/* Примеры селекторов */
+button,
+a,
+.disable-select {
+    user-select: none;
+}

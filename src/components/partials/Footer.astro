@@ -1,0 +1,21 @@
+---
+// src/components/partials/Footer.astro
+const today = new Date();
+---
+
+<footer class="footer">
+    <div class="footer__container">
+        &copy; {today.getFullYear()} Только для личного использования.
+        <div class="social-links"></div>
+    </div>
+</footer>
+
+<style lang="scss">
+    .footer {
+        background-color: var(--md-sys-color-on-secondary-fixed);
+        &__container {
+            text-align: center;
+            color: var(--md-sys-color-secondary-fixed);
+        }
+    }
+</style>

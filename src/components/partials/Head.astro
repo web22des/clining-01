@@ -1,0 +1,40 @@
+---
+// src/components/partials/Head.astro
+import "@styles/global.scss";
+
+export interface Props {
+    title?: string;
+    description?: string;
+    canonicalUrl?: string | URL;
+    noIndex?: boolean;
+    keywords?: string;
+}
+
+// Используем переданные значения или дефолты
+const { title = "Сборник курсов", description = "Сборник различных курсов на разные темы", canonicalUrl = new URL(Astro.url.pathname, Astro.site), noIndex = false, keywords = "курсы, обучение, программирование" } = Astro.props;
+const basePath = import.meta.env.BASE_URL;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="sitemap" href="/sitemap-index.xml" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Базовые иконки -->
+<link rel="icon" href=`${basePath}/favicon/favicon.ico` sizes="any" />
+<link rel="icon" href=`${basePath}/favicon/favicon.svg` type="image/svg+xml" />
+
+<!-- Адаптивные иконки -->
+<link rel="apple-touch-icon" href=`${basePath}/favicon/apple-touch-icon.png` />
+<link rel="manifest" href=`${basePath}/favicon/site.webmanifest` />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+{/* SEO Tags */}
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}

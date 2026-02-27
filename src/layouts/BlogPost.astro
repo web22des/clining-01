@@ -1,0 +1,48 @@
+---
+// src/layouts/BlogPost.astro
+import { Image } from "astro:assets";
+import type { CollectionEntry } from "astro:content";
+import PagesLayout from "./PagesLayout.astro";
+
+type Props = CollectionEntry<"blog">["data"] & {
+    children?: any;
+};
+const { title, description, pubDate, updatedDate, heroImage, alt, children } =
+    Astro.props;
+---
+
+<PagesLayout seo={{ title: title }}>
+    <div class="wrap__container">
+        <article>
+            <h1>{title}</h1>
+
+            <div class="meta">
+                <time datetime={pubDate.toISOString()}>
+                    Опубликовано: {pubDate.toLocaleDateString()}
+                </time>
+                {
+                    updatedDate && (
+                        <time datetime={updatedDate.toISOString()}>
+                            Обновлено: {updatedDate.toLocaleDateString()}
+                        </time>
+                    )
+                }
+            </div>
+
+            {
+                heroImage && (
+                    <Image
+                        src={heroImage}
+                        alt={alt || title}
+                        width={800}
+                        height={400}
+                    />
+                )
+            }
+
+            <div class="content">
+                <slot />
+            </div>
+        </article>
+    </div>
+</PagesLayout>

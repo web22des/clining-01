@@ -1,0 +1,50 @@
+---
+//src/components/partials/Header.astro
+import Link from "@ui/Link.astro";
+---
+
+<header class="header">
+    <div class="header__container">
+        <nav>
+            <div class="">
+                <h2><Link href="/">clining-01 </Link></h2>
+                <span>"version": "0.2.0"</span>
+            </div>
+            <div class="internal-links">
+                <Link href="/">Главная</Link>
+                <Link href="/catalog/">Страница</Link>
+                <Link href="/blog/">Блог</Link>
+                <Link href="/contacts/">Контакты</Link>
+            </div>
+        </nav>
+    </div>
+</header>
+
+<style lang="scss">
+    nav {
+        display: flex;
+        justify-content: space-between;
+    }
+    a {
+        text-transform: uppercase;
+        margin-right: 24px;
+    }
+
+    .header {
+        background-color: var(--md-sys-color-on-secondary-fixed);
+        &__container {
+            color: var(--md-sys-color-secondary-fixed);
+        }
+        &__container {
+            padding-top: 12px;
+            padding-bottom: 12px;
+        }
+    }
+    h2 {
+        span {
+            font-size: 12px;
+            text-transform: none;
+            display: inline-block;
+        }
+    }
+</style>

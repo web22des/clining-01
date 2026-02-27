@@ -1,0 +1,55 @@
+---
+import Head from "@components/partials/Head.astro";
+import Footer from "@components/partials/Footer.astro";
+import Header from "@components/partials/Header.astro";
+import ThemeToggle from "@ui/ThemeToggle.astro";
+
+export interface Props {
+    seo?: {
+        title?: string;
+        description?: string;
+        keywords?: string;
+        canonicalUrl?: string;
+        noIndex?: boolean;
+    };
+}
+
+const { seo = {} } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru" data-theme='light'>
+    <head>
+        <Head {...seo} />
+    </head>
+    <body>
+        <div class="wrapper">
+            <Header />
+            <main>
+                <div class="theme-toggle-wrapper">
+                    <ThemeToggle />
+                </div>
+                <slot />
+            </main>
+            <Footer />
+        </div>
+    </body>
+</html>
+
+<style lang="scss" is:global>
+    @use "@styles/base/variables.scss" as *;
+    h1 {
+        text-align: center;
+        font-size: var(--font-size-display-large);
+    }
+
+    .wrapper {
+        display: grid;
+        grid-template-rows: auto 1fr auto;
+    }
+
+    .theme-toggle-wrapper {
+        padding: var(--space-all-card);
+        text-align: end;
+    }
+</style>

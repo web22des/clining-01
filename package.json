@@ -1,0 +1,17 @@
+{
+    "name": "clining-01",
+    "type": "module",
+    "version": "0.2.0",
+    "scripts": {
+        "dev": "astro dev",
+        "build": "astro build",
+        "preview": "astro preview",
+        "astro": "astro"
+    },
+    "dependencies": {
+        "astro": "^5.18.0"
+    },
+    "devDependencies": {
+        "sass-embedded": "^1.93.2"
+    }
+}
