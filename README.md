@@ -196,3 +196,9 @@ All commands are run from the root of the project, from a terminal:
 ### deeply-disk `"version": "0.2.0"`
 
 Подробный список изменений доступен в файле `CHANGELOG.md`
+
+# Что исправить
+
+- В компоненте `src/components/ui/card/CardVar02.astro` - настроить корректную работу миксина `src/styles/utils/_focus-visible.scss ` В данный момент фокус по табу вообще не работает!!!
+- Дописать все медиа для заголовков в файле `src/styles/base/variables.scss` - синхронизировать с моим UI-kit
+- Дописать компонент - `src/components/ui/title/SectionTitleVar02.astro` - пока весть контент в хардкоде

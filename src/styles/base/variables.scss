@@ -44,7 +44,7 @@
     --font-size-title-medium: #{rem-em.rem(12)}; //12 - 16
     --font-size-title-large: #{rem-em.rem(14)}; //14 - 22
 
-    --font-size-headline-small: #{rem-em.rem(24)}; // - 24
+    --font-size-headline-small: #{rem-em.rem(20)}; //20 - 24
     --font-size-headline-medium: #{rem-em.rem(28)}; //  - 28
     --font-size-headline-large: #{rem-em.rem(22)}; // 22 - 32
 
@@ -88,7 +88,11 @@
 
     // Фоны
     --color-bg: #ffffff;
-    --color-bg-secondary: radial-gradient(2900.76% 50.13% at 50% 53.89%, rgba(58, 52, 86, 0.95) 0%, #211e2e 100%);
+    --color-bg-secondary: radial-gradient(
+        2900.76% 50.13% at 50% 53.89%,
+        rgba(58, 52, 86, 0.95) 0%,
+        #211e2e 100%
+    );
     --color-bg-dark: #343045;
     --color-bg-fill: #c0b7e8;
     --color-bg-overlay: rgba(0, 0, 0, 0.5);
@@ -105,12 +109,32 @@
     --color-focus: rgba(59, 130, 246, 0.3);
 
     // Градиенты
-    --linear-gradient-base: linear-gradient(92deg, #c0b7e8 -1.02%, #8176af 36.25%);
+    --linear-gradient-base: linear-gradient(
+        92deg,
+        #c0b7e8 -1.02%,
+        #8176af 36.25%
+    );
     --linear-gradient-primary: 92deg, #c0b7e8 -1.02%, #8176af 36.25%;
-    --linear-gradient-accent: linear-gradient(269deg, #c0b7e8 -3.72%, #8176af 82.17%);
-    --linear-gradient-line-base: linear-gradient(to right, #343045 0%, #343045 0%, #c0b7e8 34.9%, #8176af 68.75%, #343045 100%);
+    --linear-gradient-accent: linear-gradient(
+        269deg,
+        #c0b7e8 -3.72%,
+        #8176af 82.17%
+    );
+    --linear-gradient-line-base: linear-gradient(
+        to right,
+        #343045 0%,
+        #343045 0%,
+        #c0b7e8 34.9%,
+        #8176af 68.75%,
+        #343045 100%
+    );
     //--radial-gradient-base: radial-gradient(50% 50% at 50% 50%, #403a5f 0%, #211e2e 100%);
-    --radial-gradient-base: radial-gradient(circle, var(--md-sys-color-primary-container) 0%, var(--md-sys-color-tertiary-container) 50%, var(--md-sys-color-secondary-container) 100%);
+    --radial-gradient-base: radial-gradient(
+        circle,
+        var(--md-sys-color-primary-container) 0%,
+        var(--md-sys-color-tertiary-container) 50%,
+        var(--md-sys-color-secondary-container) 100%
+    );
 
     // =============================================
     // 3. ОТСТУПЫ И РАЗМЕРЫ
@@ -125,7 +149,7 @@
     --space-sm: #{rem-em.rem(12)};
     --space-md: #{rem-em.rem(6)}; // 6 - 16
     --space-lg: #{rem-em.rem(8)}; // 8 - 24
-    --space-xl: #{rem-em.rem(32)};
+    --space-xl: #{rem-em.rem(16)}; // 16 - 32
     --space-xxl: #{rem-em.rem(24)}; // 24 - 48
     --space-xxxl: #{rem-em.rem(64)};
 
@@ -138,7 +162,7 @@
     --space-all-card: #{rem-em.rem(4)}; // 16px (карточки)
 
     --space-input: var(--space-sm); // 12px (поля ввода)
-    --space-section: var(--space-xxl); // 24px (секции)
+    --space-section: var(--space-xxxl); // 24px (секции)
 
     // Специальные случаи
     --space-icon-text-large: #{rem-em.rem(24)}; // Отступ между иконкой и текстом
@@ -224,21 +248,34 @@
     // =============================================
 
     // Тени блоков
-    --box-shadow-Light-01: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
-    --box-shadow-Light-02: 0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
-    --box-shadow-Light-03: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Light-04: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Light-05: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Dark-01: 0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Dark-02: 0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Dark-03: 0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Dark-04: 0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
-    --box-shadow-Dark-05: 0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Light-01:
+        0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 1px 3px 1px rgba(0, 0, 0, 0.15);
+    --box-shadow-Light-02:
+        0px 1px 2px 0px rgba(0, 0, 0, 0.3), 0px 2px 6px 2px rgba(0, 0, 0, 0.15);
+    --box-shadow-Light-03:
+        0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Light-04:
+        0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Light-05:
+        0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Dark-01:
+        0px 1px 3px 1px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Dark-02:
+        0px 2px 6px 2px rgba(0, 0, 0, 0.15), 0px 1px 2px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Dark-03:
+        0px 4px 8px 3px rgba(0, 0, 0, 0.15), 0px 1px 3px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Dark-04:
+        0px 6px 10px 4px rgba(0, 0, 0, 0.15), 0px 2px 3px 0px rgba(0, 0, 0, 0.3);
+    --box-shadow-Dark-05:
+        0px 8px 12px 6px rgba(0, 0, 0, 0.15), 0px 4px 4px 0px rgba(0, 0, 0, 0.3);
 
     // Тени текста
-    --text-shadow-Light-02: 0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px rgba(0, 0, 0, 0.15);
-    --text-shadow-Light-03: 0px 4px 8px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
-    --text-shadow-Light-04: 0px 6px 10px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
+    --text-shadow-Light-02:
+        0px 1px 2px rgba(0, 0, 0, 0.3), 0px 2px 6px rgba(0, 0, 0, 0.15);
+    --text-shadow-Light-03:
+        0px 4px 8px rgba(0, 0, 0, 0.15), 0px 1px 3px rgba(0, 0, 0, 0.3);
+    --text-shadow-Light-04:
+        0px 6px 10px rgba(0, 0, 0, 0.15), 0px 2px 3px rgba(0, 0, 0, 0.3);
 
     // =============================================
     // 7. АНИМАЦИЯ И ПЕРЕХОДЫ
@@ -295,7 +332,7 @@
         //--font-size-display-medium: #{rem-em.rem(20)};
         --font-size-display-large: #{rem-em.rem(34)};
         --font-size-display-small: #{rem-em.rem(26)};
-
+        --font-size-headline-small: #{rem-em.rem(20)};
         --font-size-title-large: #{rem-em.rem(18)};
 
         --space-icon-text-large: #{rem-em.rem(36)};
@@ -311,6 +348,7 @@
         --font-size-headline-large: #{rem-em.rem(28)};
         --font-size-title-large: #{rem-em.rem(20)};
 
+        --space-xl: #{rem-em.rem(32)};
         --space-xxl: #{rem-em.rem(48)};
         --space-icon-text-large: #{rem-em.rem(40)};
         --space-all-card: #{rem-em.rem(12)};
@@ -329,6 +367,8 @@
         --font-size-display-large: #{rem-em.rem(46)};
         --font-size-display-medium: #{rem-em.rem(36)};
         --font-size-display-small: #{rem-em.rem(28)};
+        --font-size-headline-small: #{rem-em.rem(22)};
+
         --font-size-title-large: #{rem-em.rem(22)};
     }
     //1365px и более
@@ -337,6 +377,7 @@
         --font-size-display-large: #{rem-em.rem(50)};
         --font-size-display-medium: #{rem-em.rem(40)};
         --font-size-display-small: #{rem-em.rem(30)};
+        --font-size-headline-small: #{rem-em.rem(24)};
 
         --space-md: #{rem-em.rem(16)};
         --space-lg: #{rem-em.rem(24)};
@@ -348,6 +389,7 @@
         --font-size-display-large: #{rem-em.rem(54)};
         --font-size-display-medium: #{rem-em.rem(42)};
         --font-size-display-small: #{rem-em.rem(32)};
+        --font-size-headline-small: #{rem-em.rem(26)};
     }
     //1919px и более
     @media (min-width: $laptop-large) {
@@ -355,6 +397,7 @@
         --font-size-display-large: #{rem-em.rem(57)};
         --font-size-display-medium: #{rem-em.rem(45)};
         --font-size-display-small: #{rem-em.rem(36)};
+        --font-size-headline-small: #{rem-em.rem(24)};
 
         --font-size-headline-large: #{rem-em.rem(32)};
     }

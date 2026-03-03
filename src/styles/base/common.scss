@@ -1,42 +1,42 @@
 //
-@use '@styles/base/media-new.scss' as *;
+@use "@styles/base/media-new.scss" as *;
 
 body {
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  background-color: var(--md-sys-color-surface);
-  color: var(--md-sys-color-on-surface);
-  line-height: var(--line-height-base);
-  transition:
-    background-color 0.7s ease,
-    color 0.7s ease; // Плавное переключение темы
+    font-family: var(--font-family-base);
+    font-size: var(--font-size-base);
+    background-color: var(--md-sys-color-surface);
+    color: var(--md-sys-color-on-surface);
+    line-height: var(--line-height-base);
+    transition:
+        background-color 0.7s ease,
+        color 0.7s ease; // Плавное переключение темы
 }
 
 // Обертка для прижания подвала книзу
 .wrapper {
-  min-height: 100vh; /* Минимальная высота = высота экрана */
-  display: flex;
-  flex-direction: column;
+    min-height: 100vh; /* Минимальная высота = высота экрана */
+    display: flex;
+    flex-direction: column;
 }
 // Контент страницы
 .page {
-  flex: 1; /* Контент занимает всё свободное пространство */
+    flex: 1; /* Контент занимает всё свободное пространство */
 }
 
 /* ===== clases ====== */
 .visually-hidden:not(:focus):not(:active),
-input[type='checkbox'].visually-hidden,
-input[type='radio'].visually-hidden {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  margin: -1px;
-  padding: 0;
-  border: 0;
-  white-space: nowrap;
-  clip-path: inset(100%);
-  clip: rect(0 0 0 0);
-  overflow: hidden;
+input[type="checkbox"].visually-hidden,
+input[type="radio"].visually-hidden {
+    position: absolute;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    padding: 0;
+    border: 0;
+    white-space: nowrap;
+    clip-path: inset(100%);
+    clip: rect(0 0 0 0);
+    overflow: hidden;
 }
 
 .section-padding {
@@ -51,213 +51,213 @@ input[type='radio'].visually-hidden {
 
 // технический клас для применения в разработке. для временного скрытия блоков
 ._none {
-  display: none;
+    display: none;
 }
 // Новые классы
 .text-clear {
-  display: none;
-  //599px и более
-  @media (min-width: $mobile-large) {
-    display: block;
-  }
+    display: none;
+    //599px и более
+    @media (min-width: $mobile-large) {
+        display: block;
+    }
 }
 
 .page-accent {
 }
 
 .no-scroll {
-  overflow: hidden;
+    overflow: hidden;
 }
 
 .accent {
-  color: var(--md-sys-color-error);
+    color: var(--md-sys-color-error);
 }
 //
 
 //========================================================================================================================================================
 html.no-touch {
-  .hover-lift {
-    transition: transform 0.3s ease; /* Плавность анимации */
-    &:hover {
-      transform: translateY(-8px); /* Смещение вверх на 5px */
-      box-shadow: var(--box-shadow-Light-03);
+    .hover-lift {
+        transition: transform 0.3s ease; /* Плавность анимации */
+        &:hover {
+            transform: translateY(-8px); /* Смещение вверх на 5px */
+            box-shadow: var(--box-shadow-Light-03);
+        }
     }
-  }
 }
 
 //=== Адаптивные изображения =====================================================================================================================================================
 ._ibg {
-  position: relative;
-  overflow: hidden; // Обрезает выходящие за границы части
-  display: block; // Убирает лишние отступы (если контейнер — div/span)
-  width: 100%; // По умолчанию растягивается на всю ширину
-  aspect-ratio: 16/9; // Фиксирует пропорции (опционально)
-  border-radius: var(--border-radius-medium);
-  box-shadow: var(--box-shadow-Light-01);
-  &--color-overlay {
     position: relative;
-    &::after {
-      content: '';
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
-      background: var(--md-sys-color-on-primary-fixed);
-      opacity: 0.2; /* Регулируйте прозрачность (0.1-0.5) */
-      mix-blend-mode: multiply; /* Лучший режим для наложения цвета */
+    overflow: hidden; // Обрезает выходящие за границы части
+    display: block; // Убирает лишние отступы (если контейнер — div/span)
+    width: 100%; // По умолчанию растягивается на всю ширину
+    aspect-ratio: 16/9; // Фиксирует пропорции (опционально)
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-Light-01);
+    &--color-overlay {
+        position: relative;
+        &::after {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--md-sys-color-on-primary-fixed);
+            opacity: 0.2; /* Регулируйте прозрачность (0.1-0.5) */
+            mix-blend-mode: multiply; /* Лучший режим для наложения цвета */
+        }
     }
-  }
-  ._img {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-    top: 0;
-    left: 0;
-    object-fit: cover; // Масштабирует с обрезкой
-    object-position: center; // Центрирует (по умолчанию)
-  }
+    ._img {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        object-fit: cover; // Масштабирует с обрезкой
+        object-position: center; // Центрирует (по умолчанию)
+    }
 }
 // ==================================
 // 1. Базовый класс — только позиционирование и поведение
 .image-frame {
-  position: relative;
-  overflow: hidden;
-  display: block;
-  width: 100%;
-
-  // Разумный дефолт
-  aspect-ratio: 16 / 9;
-
-  // Оформление (можно переопределить)
-  border-radius: var(--border-radius-medium);
-  box-shadow: var(--box-shadow-Light-01);
-
-  &__img {
-    position: absolute;
-    top: 0;
-    left: 0;
+    position: relative;
+    overflow: hidden;
+    display: block;
     width: 100%;
-    height: 100%;
-    object-fit: cover;
-    object-position: center;
-    border-radius: inherit;
-  }
+
+    // Разумный дефолт
+    aspect-ratio: 16 / 9;
+
+    // Оформление (можно переопределить)
+    border-radius: var(--border-radius-medium);
+    box-shadow: var(--box-shadow-Light-01);
+
+    &__img {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+        border-radius: inherit;
+    }
 }
 
 // 2. Модификаторы пропорций
 .image-frame--portrait {
-  aspect-ratio: 9 / 16;
+    aspect-ratio: 9 / 16;
 }
 .image-frame--square {
-  aspect-ratio: 1 / 1;
+    aspect-ratio: 1 / 1;
 }
 .image-frame--wide {
-  aspect-ratio: 21 / 9;
+    aspect-ratio: 21 / 9;
 }
 .image-frame--auto {
-  aspect-ratio: auto;
+    aspect-ratio: auto;
 }
 
 // 3. Утилиты для конкретных размеров
 .image-frame--fixed-width {
-  width: 400px;
-  margin-left: auto;
-  margin-right: auto;
+    width: 400px;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .image-frame--fixed-height {
-  height: 300px;
-  width: auto;
+    height: 300px;
+    width: auto;
 }
 
 .image-frame--thumbnail {
-  width: 120px;
-  aspect-ratio: 1 / 1;
-  border-radius: 8px;
-  box-shadow: none;
+    width: 120px;
+    aspect-ratio: 1 / 1;
+    border-radius: 8px;
+    box-shadow: none;
 }
 
 .image-frame--hero {
-  max-width: 1200px;
-  aspect-ratio: 21 / 9;
-  margin: 0 auto;
+    max-width: 1200px;
+    aspect-ratio: 21 / 9;
+    margin: 0 auto;
 }
 
 .image-frame--card {
-  width: 100%;
-  max-width: 350px;
-  aspect-ratio: 4 / 3;
+    width: 100%;
+    max-width: 320px;
+    aspect-ratio: 4 / 3;
 }
 
 //=== Анимирование фона секции =====================================================================================================================================================
 
 .animate {
-  background: var(--radial-gradient-base);
+    background: var(--radial-gradient-base);
 }
 
 //=== Общие настройки swiper =====================================================================================================================================================
 
 .portfolio {
-  .swiper {
-    //--swiper-navigation-color: #fff !important;
-    --swiper-pagination-color: var(--md-sys-color-tertiary);
-    --swiper-pagination-bullet-inactive-color: var(--md-sys-color-tertiary);
-  }
-  .swiper-wrapper {
-  }
-  .swiper-slide {
-  }
-  .swiper-pagination {
-  }
+    .swiper {
+        //--swiper-navigation-color: #fff !important;
+        --swiper-pagination-color: var(--md-sys-color-tertiary);
+        --swiper-pagination-bullet-inactive-color: var(--md-sys-color-tertiary);
+    }
+    .swiper-wrapper {
+    }
+    .swiper-slide {
+    }
+    .swiper-pagination {
+    }
 
-  .swiper-pagination-bullet {
-    border-radius: 0;
-    border: 1px solid #f1efef;
-  }
-  .swiper-pagination-bullet-active {
-  }
+    .swiper-pagination-bullet {
+        border-radius: 0;
+        border: 1px solid #f1efef;
+    }
+    .swiper-pagination-bullet-active {
+    }
 
-  .swiper-button-prev,
-  .swiper-button-next {
-    color: var(--md-sys-color-on-surface);
-    &::after {
-      font-size: var(--font-size-xxxl);
-      font-family: 'icomoon';
-    }
-    &::before {
-      content: '';
-      position: absolute;
-      width: 36px;
-      height: 36px;
-      border-radius: var(--border-radius-full);
-      background-color: var(--md-sys-color-on-tertiary);
-      z-index: -1;
-    }
-  }
-  .swiper-button-prev {
-    &::after {
-      content: '\e967';
-    }
-  }
-  .swiper-button-next {
-    &::after {
-      content: '\e968';
-    }
-  }
-  .swiper-scrollbar {
-  }
-  //===== Стили для мобильного ===================================================================================================================================================
-
-  .mobile-slider {
     .swiper-button-prev,
     .swiper-button-next {
-      top: 24px;
-
-      //767px и более
-      @media (min-width: $tablet-small) {
-        display: none;
-      }
+        color: var(--md-sys-color-on-surface);
+        &::after {
+            font-size: var(--font-size-xxxl);
+            font-family: "icomoon";
+        }
+        &::before {
+            content: "";
+            position: absolute;
+            width: 36px;
+            height: 36px;
+            border-radius: var(--border-radius-full);
+            background-color: var(--md-sys-color-on-tertiary);
+            z-index: -1;
+        }
     }
-  }
+    .swiper-button-prev {
+        &::after {
+            content: "\e967";
+        }
+    }
+    .swiper-button-next {
+        &::after {
+            content: "\e968";
+        }
+    }
+    .swiper-scrollbar {
+    }
+    //===== Стили для мобильного ===================================================================================================================================================
+
+    .mobile-slider {
+        .swiper-button-prev,
+        .swiper-button-next {
+            top: 24px;
+
+            //767px и более
+            @media (min-width: $tablet-small) {
+                display: none;
+            }
+        }
+    }
 }

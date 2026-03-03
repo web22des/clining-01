@@ -18,7 +18,7 @@ const { seo = {} } = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ru" data-theme='light'>
+<html lang="ru" data-theme="light">
     <head>
         <Head {...seo} />
     </head>
@@ -38,6 +38,7 @@ const { seo = {} } = Astro.props;
 
 <style lang="scss" is:global>
     @use "@styles/base/variables.scss" as *;
+
     h1 {
         text-align: center;
         font-size: var(--font-size-display-large);

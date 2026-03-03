@@ -11,7 +11,13 @@ export interface Props {
 }
 
 // Используем переданные значения или дефолты
-const { title = "Сборник курсов", description = "Сборник различных курсов на разные темы", canonicalUrl = new URL(Astro.url.pathname, Astro.site), noIndex = false, keywords = "курсы, обучение, программирование" } = Astro.props;
+const {
+    title = "Сборник курсов",
+    description = "Сборник различных курсов на разные темы",
+    canonicalUrl = new URL(Astro.url.pathname, Astro.site),
+    noIndex = false,
+    keywords = "курсы, обучение, программирование",
+} = Astro.props;
 const basePath = import.meta.env.BASE_URL;
 ---
 

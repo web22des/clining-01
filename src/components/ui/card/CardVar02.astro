@@ -1,0 +1,79 @@
+---
+// src/components/ui/card/CardVar02.astro
+import Link from "../Link.astro";
+import Images from "../Images.astro";
+import type { ImageMetadata } from "astro";
+
+export interface Props {
+    id: string;
+    title: string;
+    subTitle: string;
+    href: string;
+    image: ImageMetadata; // Важно: передаем импортированное изображение
+    imageAlt: string;
+    imageWidth: number;
+    imageHeight?: number;
+}
+
+const { id, title, subTitle, href, image, imageAlt, imageWidth, imageHeight } =
+    Astro.props;
+---
+
+<div class="card-var-02" id={id}>
+    <Link class="card-var-02__link" href={href}>
+        <div class="card-var-02__body">
+            <p class="card-var-02__subtitle">{subTitle}</p>
+            <h3 class="card-var-02__title">{title}</h3>
+
+            {/* Ссылка-оверлей на всю карточку */}
+        </div>
+        {/* Оптимизированное изображение через твой компонент */}
+        <Images
+            src={image}
+            alt={imageAlt}
+            width={imageWidth}
+            height={imageHeight}
+            class="image-frame__img"
+        />
+    </Link>
+</div>
+
+<style lang="scss">
+    //@use "@styles/utils/focus-visible.scss" as *;
+    .card-var-02 {
+        //@include focus-visible;
+        position: relative;
+        overflow: hidden;
+        display: block;
+        // max-height: 480px;
+        // max-width: 360px;
+        width: 100%;
+        aspect-ratio: 3 / 4;
+        border-radius: var(--border-radius-large);
+        box-shadow: var(--box-shadow-Light-03);
+        &__body {
+            position: absolute;
+            padding: var(--space-lg);
+            left: 50%;
+            bottom: var(--space-xxxl);
+            transform: translateX(-50%);
+            z-index: 1;
+            width: 100%;
+            text-align: center;
+        }
+        &__subtitle {
+            color: var(--md-sys-color-secondary-fixed-dim);
+            font-size: var(--font-size-headline-small);
+            margin-bottom: var(--space-sm);
+        }
+        &__title {
+            color: var(--md-sys-color-secondary-fixed);
+            font-size: var(--font-size-headline-medium);
+            margin-bottom: var(--space-xxxl);
+        }
+
+        &__link {
+            width: 100%;
+        }
+    }
+</style>

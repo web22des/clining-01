@@ -93,5 +93,9 @@ $desktop: map.get($breakpoints, "xxlarge");
 // ======================================================
 /// Миксин для адаптивного свойства (clamp)
 @mixin responsive-property($property, $min-size, $max-size) {
-    #{$property}: clamp(rem-em.rem($min-size), #{math.div($max-size - $min-size, $max-width - $min-width) * 100}vw, rem-em.rem($max-size));
+    #{$property}: clamp(
+        rem-em.rem($min-size),
+        #{math.div($max-size - $min-size, $max-width - $min-width) * 100}vw,
+        rem-em.rem($max-size)
+    );
 }

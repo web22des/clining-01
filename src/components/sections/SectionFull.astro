@@ -1,0 +1,51 @@
+---
+// src/components/sections/SectionFull.astro
+import SectionTitleVar01 from "@components/ui/title/SectionTitleVar01.astro";
+import { heroTitle } from "@data/sections/SectionFull/data";
+//
+import CardVar03 from "@components/ui/card/CardVar03.astro";
+import { cardsData } from "@data/sections/SectionFull/data";
+---
+
+<div class="section-full">
+    <div class="section-full__container">
+        <SectionTitleVar01
+            title={heroTitle.title}
+            subtitle={heroTitle.subtitle}
+        />
+        <div class="section-full__header"></div>
+        <div class="section-full__body">
+            {
+                cardsData.map((item) => (
+                    <CardVar03
+                        id={item.id}
+                        price={item.price}
+                        action={item.action}
+                        title={item.title}
+                        description={item.description}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/mixins/grid" as grid;
+    @use "@styles/base/media-new" as *;
+
+    .section-full {
+        &__body {
+            @include grid.grid-1-columns;
+
+            //599px и более
+            @media (min-width: $mobile-large) {
+                @include grid.grid-2-columns;
+            }
+            //767px и более
+            @media (min-width: $tablet-small) {
+                @include grid.grid-3-columns;
+            }
+        }
+    }
+</style>

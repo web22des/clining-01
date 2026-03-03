@@ -1,0 +1,56 @@
+---
+// src/components/sections/Section_var-03/SectionVar03.astro
+
+import { heroTitle } from "@data/sections/SectionVar03/data";
+import SectionTitleVar01 from "@components/ui/title/SectionTitleVar01.astro";
+//
+import CardVar02 from "@components/ui/card/CardVar02.astro";
+import { cardsData } from "@data/sections/SectionVar03/data.ts";
+---
+
+<section class="sectionVar03">
+    <div class="sectionVar03__container">
+        <SectionTitleVar01
+            title={heroTitle.title}
+            subtitle={heroTitle.subtitle}
+        />
+        <div class="sectionVar03__card-grup">
+            {
+                cardsData.map((item) => (
+                    <CardVar02
+                        id={item.id}
+                        title={item.title}
+                        subTitle={item.subTitle}
+                        href={item.href}
+                        image={item.image}
+                        imageAlt={item.imageAlt}
+                        imageWidth={item.imageWidth}
+                        imageHeight={item.imageHeight}
+                    />
+                ))
+            }
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    @use "@styles/base/mixins/grid.scss" as grid;
+    @use "@styles/base/media-new.scss" as *;
+
+    .sectionVar03 {
+        &__container {
+        }
+
+        &__card-grup {
+            @include grid.grid-1-columns(48);
+            //599px и более
+            @media (min-width: $mobile-large) {
+                @include grid.grid-2-columns(24px);
+            }
+            //767px и более
+            @media (min-width: $tablet-small) {
+                @include grid.grid-3-columns(24px);
+            }
+        }
+    }
+</style>

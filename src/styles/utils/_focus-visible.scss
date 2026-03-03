@@ -1,7 +1,7 @@
 // src/styles/utils/_focus-visible.scss
 @mixin focus-visible {
     &:focus-visible {
-        outline: 2px solid var(--md-sys-color-primary);
+        outline: 2px solid var(--md-sys-color-error);
         outline-offset: 2px;
         box-shadow: 0 0 0 4px rgba(var(--md-sys-color-primary-rgb), 0.2);
     }

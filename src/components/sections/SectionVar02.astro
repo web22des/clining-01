@@ -1,0 +1,30 @@
+---
+// src/components/sections/SectionVar02.astro
+---
+
+<div class="sectionVar02">
+    <div class="sectionVar02__container">
+        <p>Быстро, качественно, надёжно — закажите сейчас!</p>
+        <button class="button button--filled">Получить предложение</button>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/media-new" as *;
+    .sectionVar02 {
+        &__container {
+            padding-top: 0;
+            text-align: center;
+            align-items: center;
+            justify-content: center;
+            //767px и более
+            @media (min-width: $tablet-small) {
+                display: flex;
+                gap: var(--space-grid-gap);
+            }
+        }
+        p {
+            font-size: var(--font-size-headline-small);
+        }
+    }
+</style>

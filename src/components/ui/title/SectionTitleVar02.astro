@@ -1,0 +1,38 @@
+---
+// src/components/ui/title/SectionTitleVar01.astro
+---
+
+<div class="section-title">
+    <div class="section-title__container">
+        <h2>
+            Все виды клининговых услуг для физических и юридических лиц в
+            Москве, Сочи, Воронеже
+        </h2>
+        <p>
+            Мы оказываем широкий спектр услуг: от уборки небольших квартир и
+            мойки окон до генеральной уборки коммерческих объектов и
+            недвижимости, а также уборки после ремонта.
+        </p>
+        <p>Мы подберем лучшее решение с учетом особенностей вашего объекта.</p>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/media-new" as *;
+
+    .section-title {
+        text-align: center;
+        h2 {
+            font-size: var(--font-size-display-medium);
+            color: var(--md-sys-color-on-surface);
+            margin-bottom: var(--space-xl);
+        }
+        p {
+            font-size: var(--font-size-headline-small);
+            color: var(--md-sys-color-on-surface-variant);
+            &:last-child {
+                margin-top: var(--space-xs);
+            }
+        }
+    }
+</style>

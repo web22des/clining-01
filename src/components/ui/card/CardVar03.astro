@@ -1,0 +1,72 @@
+---
+// src/components/ui/card/CardVar02.astro
+
+export interface Props {
+    id: string;
+    price: string;
+    action?: string;
+    title: string;
+    description: string;
+}
+
+const { id, price, action, title, description } = Astro.props;
+---
+
+<div class="card" id={id}>
+    <div class="card__header">
+        <span class="card__price">{price}</span>
+        {
+            action && action.trim() !== "" && (
+                <span class="card__action">{action}</span>
+            )
+        }
+    </div>
+    <div class="card__body">
+        <h3 class="card__title">{title}</h3>
+        <p class="card__description">{description}</p>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/mixins/grid.scss" as grid;
+
+    .card {
+        background-color: var(--md-sys-color-surface-variant);
+        border-radius: var(--border-radius-large);
+        box-shadow: var(--box-shadow-Light-03);
+        padding-left: var(--space-all-card);
+        padding-right: var(--space-all-card);
+        padding-top: 12px;
+        padding-bottom: 12px;
+        &__header {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 76px;
+        }
+        &__price {
+            color: var(--md-sys-color-on-tertiary-fixed);
+            background-color: var(--md-sys-color-secondary-fixed);
+            border-radius: var(--border-radius-large);
+            font-size: var(--font-size-title-large);
+            display: inline-block;
+            padding: 0px 8px 0px 8px;
+        }
+        &__action {
+            background-color: var(--md-sys-color-on-tertiary-fixed);
+            border-radius: var(--border-radius-large);
+            color: var(--md-sys-color-tertiary-fixed);
+            font-size: var(--font-size-title-medium);
+            display: inline-block;
+            padding: 4px 12px 4px 12px;
+        }
+        &__body {
+        }
+        &__title {
+            font-size: var(--font-size-headline-medium);
+            margin-bottom: var(--space-sm);
+        }
+        &__description {
+            font-size: var(--font-size-body-large);
+        }
+    }
+</style>
