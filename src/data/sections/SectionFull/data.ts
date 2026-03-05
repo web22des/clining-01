@@ -3,12 +3,46 @@ import { validateUniqueIds } from "@utils/index.ts";
 import type { Props as CardData } from "@components/ui/card/CardVar03.astro";
 import type { Props as SectionTitle } from "@components/ui/title/SectionTitleVar01.astro";
 
+import img01 from "@assets/test-1920.jpg";
+import img02 from "@assets/test-552-01.jpg";
+import img03 from "@assets/test-552-02.jpg";
+
 export const heroTitle: SectionTitle = {
     id: "cleaning kits",
     title: "Наши клининговые комплекты",
     subtitle:
-        "Наша компания предлагает профессиональные клининговые комплекты для  домов и бизнес",
+        "Наша компания предлагает профессиональные клининговые комплекты для  домов и бизнеса",
     tag: "h2",
+};
+
+export const SectionImages = {
+    top: {
+        src: img01,
+        alt: "Описание первого изображения",
+        width: 1128,
+        height: 632,
+        widths: [320, 440, 744, 1128, 2256],
+        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 744px, (max-width: 1128px) 1128px, 1128px",
+        format: "avif",
+    },
+    left: {
+        src: img02,
+        alt: "Описание второго изображения",
+        width: 552,
+        height: 552,
+        widths: [320, 440, 744, 1128, 2256],
+        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 381px, (max-width: 1128px) 552px,",
+        format: "avif",
+    },
+    right: {
+        src: img03,
+        alt: "Описание третьего изображения",
+        width: 552,
+        height: 552,
+        widths: [320, 440, 744, 1128, 2256],
+        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 381px, (max-width: 1128px) 552px,",
+        format: "avif",
+    },
 };
 
 export const cardsData: CardData[] = [

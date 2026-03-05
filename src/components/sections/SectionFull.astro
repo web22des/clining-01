@@ -5,6 +5,9 @@ import { heroTitle } from "@data/sections/SectionFull/data";
 //
 import CardVar03 from "@components/ui/card/CardVar03.astro";
 import { cardsData } from "@data/sections/SectionFull/data";
+import { Image } from "astro:assets";
+
+import { SectionImages } from "@data/sections/SectionFull/data";
 ---
 
 <div class="section-full">
@@ -13,7 +16,38 @@ import { cardsData } from "@data/sections/SectionFull/data";
             title={heroTitle.title}
             subtitle={heroTitle.subtitle}
         />
-        <div class="section-full__header"></div>
+        <div class="section-full__header">
+            <Image
+                src={SectionImages.top.src}
+                alt={SectionImages.top.alt}
+                width={SectionImages.top.width}
+                height={SectionImages.top.height}
+                widths={SectionImages.top.widths}
+                sizes={SectionImages.top.sizes}
+                format={SectionImages.top.format}
+            />
+        </div>
+        <div class="section-full__wrapper section-padding">
+            <Image
+                src={SectionImages.left.src}
+                alt={SectionImages.left.alt}
+                width={SectionImages.left.width}
+                height={SectionImages.left.height}
+                widths={SectionImages.left.widths}
+                sizes={SectionImages.left.sizes}
+                format={SectionImages.left.format}
+            />
+
+            <Image
+                src={SectionImages.right.src}
+                alt={SectionImages.right.alt}
+                width={SectionImages.right.width}
+                height={SectionImages.right.height}
+                widths={SectionImages.right.widths}
+                sizes={SectionImages.right.sizes}
+                format={SectionImages.right.format}
+            />
+        </div>
         <div class="section-full__body">
             {
                 cardsData.map((item) => (
@@ -35,6 +69,22 @@ import { cardsData } from "@data/sections/SectionFull/data";
     @use "@styles/base/media-new" as *;
 
     .section-full {
+        img {
+            width: 100%;
+            height: auto;
+            border-radius: var(--border-radius-large);
+        }
+        &__header {
+            margin-bottom: var(--space-grid-gap);
+        }
+
+        &__wrapper {
+            @include grid.grid-1-columns;
+            //767px и более
+            @media (min-width: $tablet-small) {
+                @include grid.grid-2-columns;
+            }
+        }
         &__body {
             @include grid.grid-1-columns;
 
