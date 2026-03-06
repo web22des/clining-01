@@ -20,17 +20,22 @@ export interface Props {
         &__container {
             padding-top: 0;
             text-align: center;
-            align-items: center;
-            justify-content: center;
             //767px и более
             @media (min-width: $tablet-small) {
                 display: flex;
+                align-items: center;
+                justify-content: center;
                 gap: var(--space-grid-gap);
             }
         }
         p {
             font-size: var(--font-size-headline-small);
             margin-bottom: var(--space-grid-gap);
+
+            //767px и более
+            @media (min-width: $tablet-small) {
+                margin-bottom: 0;
+            }
         }
     }
 </style>

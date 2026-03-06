@@ -1,0 +1,118 @@
+---
+// src/components/ui/card/CardVar04.astro
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+// ✅ Дефолтный аватар (заглушка, если не передали)
+import av01 from "@assets/temp/avatars/av-01.png";
+
+export interface Props {
+    title: string;
+    subtitle: string;
+    mail: string;
+    phone: string;
+    src?: ImageMetadata; // ✅ Опционально (будет дефолт)
+    alt?: string; // ✅ Опционально (будет дефолт)
+}
+
+// ✅ Деструктуризация + значения по умолчанию
+const {
+    title = "Заголовок карточки",
+    subtitle = "Подзаголовок карточки",
+    mail = "info_test@test.ru",
+    phone = "8 999 888 77 66",
+    src = av01, // ✅ Дефолтное изображение
+    alt = "Аватарка специалиста", // ✅ Дефолтный alt
+} = Astro.props;
+
+// ✅ Фиксированные размеры аватара (можно вынести в пропсы, если нужно)
+const AVATAR_SIZE = 128;
+---
+
+<div class="card-v04">
+    <div class="card-v04__wpapper">
+        <Image
+            src={src}
+            alt={alt}
+            width={AVATAR_SIZE}
+            height={AVATAR_SIZE}
+            loading="lazy"
+            class="card-v04__avatar"
+        />
+
+        <div class="card-v04__body">
+            <h3 class="card-v04__title">{title}</h3>
+            <span class="card-v04__subtitle">{subtitle}</span>
+
+            <!-- Контакты (семантика для SEO) -->
+            <div class="card-v04__contacts">
+                <a class="card-v04__mail" href={`mailto:${mail}`}>{mail}</a>
+                <a
+                    class="card-v04__phone"
+                    href={`tel:${phone.replace(/\s/g, "")}`}>{phone}</a
+                >
+            </div>
+        </div>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/media-new.scss" as *;
+    .card-v04 {
+        max-width: 552px;
+        width: 100%;
+        background-color: var(--md-sys-color-surface);
+        box-shadow: var(--box-shadow-Light-02);
+        padding: var(--space-sm);
+        text-align: center;
+
+        //767px и более
+        @media (min-width: $tablet-small) {
+        }
+
+        &__wpapper {
+            border-radius: var(--border-radius-large);
+            border: 1px solid var(--md-sys-color-on-surface);
+            padding: 24px;
+
+            img {
+                margin-bottom: var(--space-ld);
+            }
+
+            //767px и более
+            @media (min-width: $tablet-small) {
+                display: flex;
+                gap: var(--space-grid-gap);
+            }
+        }
+
+        &__body {
+        }
+        &__title {
+            font-size: var(--font-size-headline-medium);
+            margin-bottom: var(--space-sm);
+        }
+
+        &__subtitle {
+            display: inline-block;
+            padding: 4px 12px;
+            background-color: var(--md-sys-color-secondary-fixed);
+            font-size: var(--font-size-title-large);
+            color: var(--md-sys-color-on-tertiary-fixed);
+            margin-bottom: 36px;
+        }
+
+        &__mail {
+            display: block;
+            font-size: var(--font-size-headline-large);
+            color: var(--md-sys-color-tertiary-fixed-dim);
+            margin-bottom: var(--space-sm);
+        }
+
+        &__phone {
+            display: block;
+            font-size: var(--font-size-headline-large);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+    }
+</style>

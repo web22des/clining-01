@@ -1,0 +1,43 @@
+---
+// src/components/templates/sv05/Sv05.astro
+import CardVar04 from "@components/ui/card/CardVar04.astro";
+
+import { testD } from "@data/sections/vizitka/visitkaData";
+
+export interface Props {
+    descr: string;
+}
+
+const { descr = "Описание секции, призыв к действию. Короткий абзац " } =
+    Astro.props;
+---
+
+<div class="sv05">
+    <div class="sv05__container">
+        <CardVar04
+            title={testD.title}
+            subtitle={testD.subtitle}
+            mail={testD.mail}
+            phone={testD.phone}
+            src={testD.src}
+        />
+        <p>{descr}</p>
+    </div>
+</div>
+
+<style lang="scss">
+    .sv05 {
+        background-color: var(--md-sys-color-surface-variant);
+        &__container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+
+            p {
+                text-align: center;
+                padding-top: var(--space-all-card);
+                font-size: var(--font-size-headline-small);
+            }
+        }
+    }
+</style>

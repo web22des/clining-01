@@ -1,0 +1,14 @@
+---
+// src/components/sections/vizitka/Vizitka.astro
+import Sv05 from "@components/templates/sv05/Sv05.astro";
+
+import { testDescr } from "@data/sections/vizitka/visitkaData";
+
+export interface Props {
+    descr: string;
+}
+
+const { descr } = Astro.props;
+---
+
+<Sv05 descr={testDescr.descr} />
