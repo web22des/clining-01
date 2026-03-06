@@ -8,6 +8,8 @@ import { cardsData } from "@data/sections/SectionFull/data";
 import { Image } from "astro:assets";
 
 import { SectionImages } from "@data/sections/SectionFull/data";
+import SectionVar02 from "@components/sections/SectionVar02/SectionVar02.astro";
+import { StaVar02 } from "@data/sections/StaVar02.ts";
 ---
 
 <div class="section-full">
@@ -63,6 +65,10 @@ import { SectionImages } from "@data/sections/SectionFull/data";
         </div>
     </div>
 </div>
+<SectionVar02
+    description={StaVar02.description}
+    btnText={StaVar02.description}
+/>
 
 <style lang="scss">
     @use "@styles/base/mixins/grid" as grid;

@@ -50,5 +50,6 @@ export const cardsData: CardData[] = [
         imageAlt: "Описание изображения",
     },
 ];
+
 // ✅ Валидация уникальности ID (сработает при сборке)
 validateUniqueIds(cardsData);

@@ -202,3 +202,16 @@ All commands are run from the root of the project, from a terminal:
 - В компоненте `src/components/ui/card/CardVar02.astro` - настроить корректную работу миксина `src/styles/utils/_focus-visible.scss ` В данный момент фокус по табу вообще не работает!!!
 - Дописать все медиа для заголовков в файле `src/styles/base/variables.scss` - синхронизировать с моим UI-kit
 - Дописать компонент - `src/components/ui/title/SectionTitleVar02.astro` - пока весть контент в хардкоде
+- исправить ошибки в `SectionVar-02.astro` (перейти на `<Images />`)
+- Переписать структуру компонентов
+
+1. `src/components/sections/SectionVar02/SectionVar02.astro`
+2. `src/components/sections/SectionVar03/SectionVar03.astro`
+3. `src/components/sections/SectionVar04.astro`
+4. `src/components/sections/SectionFull.astro`
+
+**что именно переписать**
+
+Немного изменить структуру, а именно, данные компоненты использовать ТОЛЬКО как готовые шаблоны, и поэтому в новых проектах в `data` папке вести нейминг, который соответствует смыслу страницы. **Пример:**
+
+- `src/data/sections/StaVar02.ts` переименовать в `src/data/sections/Секция_проекта.ts`

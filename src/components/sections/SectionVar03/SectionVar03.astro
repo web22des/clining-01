@@ -6,6 +6,8 @@ import SectionTitleVar01 from "@components/ui/title/SectionTitleVar01.astro";
 //
 import CardVar02 from "@components/ui/card/CardVar02.astro";
 import { cardsData } from "@data/sections/SectionVar03/data.ts";
+import SectionVar02 from "@components/sections/SectionVar02/SectionVar02.astro";
+import { StaVar02 } from "@data/sections/StaVar02.ts";
 ---
 
 <section class="sectionVar03">
@@ -32,6 +34,7 @@ import { cardsData } from "@data/sections/SectionVar03/data.ts";
         </div>
     </div>
 </section>
+<SectionVar02 description={StaVar02.description} , btnText={StaVar02.btnText} />
 
 <style lang="scss">
     @use "@styles/base/mixins/grid.scss" as grid;
