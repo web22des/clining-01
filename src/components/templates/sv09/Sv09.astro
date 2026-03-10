@@ -1,0 +1,60 @@
+---
+// src/components/templates/sv09/Sv09.astro
+
+export interface PropsSv09 {
+    title: string;
+    btntext: string;
+}
+
+const {
+    title = "Короткий призыв для STA блока (40 символов)",
+    btntext = "Описание кнопки",
+} = Astro.props;
+---
+
+<div class="sv09">
+    <div class="sv09__container">
+        <span>{title}</span>
+        <button class="button button--outlined">{btntext}</button>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/media-new.scss" as *;
+    .sv09 {
+        background-color: var(--md-sys-color-on-primary-fixed);
+        &__container {
+            text-align: center;
+
+            //1279px и более
+            @media (min-width: $tablet-large) {
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                gap: var(--space-grid-gap);
+            }
+        }
+
+        span {
+            display: block;
+            font-size: var(--font-size-display-small);
+            color: var(--md-sys-color-primary-fixed);
+            margin-bottom: var(--space-xl);
+            //1279px и более
+            @media (min-width: $tablet-large) {
+                margin-bottom: 0;
+            }
+        }
+        button {
+            display: block;
+            margin-right: auto;
+            margin-left: auto;
+
+            //1279px и более
+            @media (min-width: $tablet-large) {
+                margin-right: 0;
+                margin-left: 0;
+            }
+        }
+    }
+</style>
