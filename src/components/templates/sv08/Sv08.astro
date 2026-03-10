@@ -1,0 +1,230 @@
+---
+// src/components/templates/sv08/Sv08.astro
+import SectionTitleVar01 from "@components/ui/title/SectionTitleVar01.astro";
+import { Image } from "astro:assets";
+import type { ImageMetadata } from "astro";
+
+import images01 from "@assets/temp/images/360-01.jpg";
+import images02 from "@assets/temp/images/360-02.jpg";
+import images03 from "@assets/temp/images/360х168-01.jpg";
+import images04 from "@assets/temp/images/360х168-02.jpg";
+
+type ImageData = {
+    src: ImageMetadata;
+    alt: string;
+    width?: number;
+    height?: number;
+};
+export interface PropsSv08 {
+    sectionTitle?: string;
+    SectionSubtitle?: string;
+    descr?: string;
+    img01?: ImageData;
+    img02?: ImageData;
+    img03?: ImageData;
+    img04?: ImageData;
+}
+
+const {
+    sectionTitle,
+    SectionSubtitle,
+    img01 = {
+        src: images01,
+        alt: "alt",
+        width: 360,
+        height: 360,
+    },
+    img02 = {
+        src: images02,
+        alt: "alt",
+        width: 360,
+        height: 360,
+    },
+    img03 = {
+        src: images03,
+        alt: "alt",
+        width: 360,
+        height: 180,
+    },
+    img04 = {
+        src: images04,
+        alt: "alt",
+        width: 360,
+        height: 180,
+    },
+    descr = "Разработка сайта — как стройка: нельзя залить фундамент, а завтра передумать и перенести стены. Чем точнее ТЗ изначально, тем быстрее и дешевле результат. Ваше внимание к деталям на старте — гарантия качества на финише.",
+} = Astro.props;
+---
+
+<section class="sv08">
+    <div class="sv08__container">
+        <div class="sv08__title">
+            <SectionTitleVar01
+                title={sectionTitle}
+                subtitle={SectionSubtitle}
+            />
+        </div>
+        <div class="sv08__img-header image-frame image-frame--auto">
+            <Image
+                src={img01.src}
+                alt={img01.alt}
+                width={img01.width}
+                height={img01.height}
+                class="image-frame__img"
+            />
+        </div>
+        <div class="sv08__body-top image-frame image-frame--auto">
+            <Image
+                src={img03.src}
+                alt={img03.alt}
+                width={img03.width}
+                height={img03.height}
+                class="image-frame__img"
+            />
+        </div>
+        <div class="sv08__body-bottom image-frame image-frame--auto">
+            <Image
+                src={img04.src}
+                alt={img04.alt}
+                width={img04.width}
+                height={img04.height}
+                class="image-frame__img"
+            />
+        </div>
+        <div class="sv08__img-footer image-frame image-frame--auto">
+            <Image
+                src={img02.src}
+                alt={img02.alt}
+                width={img02.width}
+                height={img02.height}
+                class="image-frame__img"
+            />
+        </div>
+        <div class="sv08__description">
+            <p>{descr}</p>
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    @use "@styles/base/media-new.scss" as *;
+    .sv08 {
+        &__container {
+            display: grid;
+            grid-auto-flow: row;
+            grid-template-columns: repeat(1, 1fr);
+            grid-template-rows: repeat(4, auto);
+            gap: var(--space-grid-gap);
+            grid-template-areas:
+                "sv08__title"
+                "sv08__img-header"
+                "sv08__img-footer"
+                "sv08__description";
+
+            //411px и более
+            @media (min-width: $mobile-large) {
+                grid-template-columns: repeat(2, 1fr);
+                grid-template-rows: repeat(4, 180px);
+                grid-template-areas:
+                    "sv08__title sv08__img-header"
+                    "sv08__body-bottom sv08__img-header"
+                    "sv08__img-footer sv08__body-top "
+                    "sv08__img-footer sv08__description";
+            }
+
+            //767px и более
+            @media (min-width: $tablet-small) {
+                grid-template-columns: repeat(3, 1fr);
+                grid-template-rows: repeat(4, 168px);
+                grid-template-areas:
+                    "sv08__title sv08__title sv08__img-header"
+                    ". sv08__body-top sv08__img-header"
+                    "sv08__img-footer sv08__body-bottom ."
+                    "sv08__img-footer sv08__description sv08__description";
+            }
+        }
+        &__title {
+            grid-area: sv08__title;
+        }
+        &__img-header {
+            grid-area: sv08__img-header;
+            margin-bottom: var(--space-grid-gap);
+            height: 300px;
+
+            img {
+                border-radius: var(--border-radius-large);
+            }
+            //1365px и более
+            @media (min-width: $mobile-large) {
+                height: auto;
+            }
+            //767px и более
+            @media (min-width: $tablet-small) {
+                margin-bottom: 0;
+            }
+        }
+        &__body-top {
+            //display: none;
+            grid-area: sv08__body-top;
+            margin-bottom: var(--space-grid-gap);
+            img {
+                border-radius: var(--border-radius-large);
+            }
+            //411px и более
+            @media (min-width: $mobile-large) {
+                display: block;
+            }
+            //767px и более
+            @media (min-width: $tablet-small) {
+                margin-bottom: 0;
+            }
+        }
+        &__body-bottom {
+            grid-area: sv08__body-bottom;
+            //display: none;
+            margin-bottom: var(--space-grid-gap);
+            img {
+                border-radius: var(--border-radius-large);
+            }
+            //411px и более
+            @media (min-width: $mobile-large) {
+                display: block;
+            }
+            //767px и более
+            @media (min-width: $tablet-small) {
+                margin-bottom: 0;
+            }
+        }
+        &__img-footer {
+            grid-area: sv08__img-footer;
+            margin-bottom: var(--space-grid-gap);
+            height: 300px;
+            img {
+                border-radius: var(--border-radius-large);
+            }
+            //599px и более
+            @media (min-width: $mobile-large) {
+                height: auto;
+            }
+            //767px и более
+            @media (min-width: $tablet-small) {
+                margin-bottom: 0;
+            }
+        }
+        &__description {
+            grid-area: sv08__description;
+            text-align: center;
+            font-size: var(--font-size-body-large);
+
+            //599px и более
+            @media (min-width: $mobile-large) {
+            }
+            //411px и более
+            display: flex;
+            text-align: start;
+            align-items: flex-end;
+            @media (min-width: $mobile-large) {
+            }
+        }
+    }
+</style>

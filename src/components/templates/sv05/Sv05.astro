@@ -2,10 +2,10 @@
 // src/components/templates/sv05/Sv05.astro
 import CardVar04 from "@components/ui/card/CardVar04.astro";
 
-import { testD } from "@data/sections/vizitka/visitkaData";
+import { testD, testDescr } from "@data/sections/vizitka/visitkaData"; // тут указываем файл с данными секции
 
 export interface Props {
-    descr: string;
+    descr?: string;
 }
 
 const { descr = "Описание секции, призыв к действию. Короткий абзац " } =
@@ -21,7 +21,7 @@ const { descr = "Описание секции, призыв к действию
             phone={testD.phone}
             src={testD.src}
         />
-        <p>{descr}</p>
+        <p>{testDescr.descr}</p>
     </div>
 </div>
 

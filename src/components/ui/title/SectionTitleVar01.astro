@@ -1,13 +1,18 @@
 ---
 // src/components/ui/title/SectionTitleVar01.astro
-export interface Props {
+export interface TitleProps {
     id?: string;
-    title: string;
-    subtitle: string;
+    title?: string;
+    subtitle?: string;
     tag?: string;
 }
 
-const { title, subtitle, id, tag } = Astro.props;
+const {
+    title = "Заголовок секции",
+    subtitle = "Код - это история, которую ты оставляешь после себя. Пиши её так, чтобы другие хотели читать.",
+    id,
+    tag,
+} = Astro.props;
 ---
 
 <div class="section-title" id={id}>

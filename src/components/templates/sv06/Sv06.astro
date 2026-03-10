@@ -1,0 +1,47 @@
+---
+import Cv05 from "@components/ui/card/Cv05.astro";
+import SectionTitleVar01 from "@components/ui/title/SectionTitleVar01.astro";
+
+import {
+    headData,
+    cardsData,
+    imagesData,
+} from "@data/sections/advantages/advantagesData";
+import { Image } from "astro:assets";
+
+// src/components/templates/sv06/Sv06.astro
+---
+
+<section class="sv06">
+    <div class="sv06__container">
+        <SectionTitleVar01
+            title={headData.title}
+            subtitle={headData.subtitle}
+        />
+        <div class="sv06__grup">
+            {cardsData.map((item) => <Cv05 {...item} />)}
+        </div>
+        <div class="sv06__footer">
+            <Image src={imagesData.src} alt={imagesData.alt} />
+        </div>
+    </div>
+</section>
+
+<style lang="scss">
+    @use "@styles/base/mixins/grid.scss" as grid;
+    .sv06 {
+        &__container {
+        }
+        &__grup {
+            @include grid.grid-3-columns(24px);
+            margin-bottom: var(--space-xxl);
+        }
+        &__footer {
+            img {
+                max-width: 1128px;
+                width: 100%;
+                height: auto;
+            }
+        }
+    }
+</style>

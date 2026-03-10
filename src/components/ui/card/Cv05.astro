@@ -1,0 +1,52 @@
+---
+// src/components/ui/card/Cv05.astro
+
+export interface Props {
+    id?: string;
+    title: string;
+    descr: string;
+    className: string;
+}
+
+const {
+    title = "Заголовок карточки",
+    descr = "Описание услуги в несколько строк. Но не более четырех, далее должен включаться скролл (прокрутка текста)",
+    className = "_icon-image",
+} = Astro.props;
+---
+
+<div class="cv05">
+    <div class="cv05__header">
+        <span class={className}></span>
+        <h3>{title}</h3>
+    </div>
+    <p>{descr}</p>
+</div>
+
+<style lang="scss">
+    .cv05 {
+        padding: var(--space-sm);
+        box-shadow: var(--box-shadow-Light-03);
+        border-radius: var(--border-radius-large);
+        &__header {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+
+            margin-bottom: var(--space-xl);
+            h3 {
+                font-size: var(--font-size-headline-small);
+            }
+        }
+        p {
+            font-size: var(--font-size-body-medium);
+            color: var(--md-sys-color-on-surface-variant);
+        }
+        [class*="_icon-"] {
+            font-family: "icomoon";
+            font-size: var(--space-xl);
+            color: var(--md-sys-color-on-tertiary-container);
+            padding-left: var(--space-sm);
+        }
+    }
+</style>
