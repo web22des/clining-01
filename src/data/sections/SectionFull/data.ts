@@ -1,13 +1,13 @@
 import { validateUniqueIds } from "@utils/index.ts";
 
 import type { Props as CardData } from "@components/ui/card/CardVar03.astro";
-import type { Props as SectionTitle } from "@components/ui/title/SectionTitleVar01.astro";
+import type { TitleProps } from "@components/ui/title/SectionTitleVar01.astro";
 
 import img01 from "@assets/test-1920.jpg";
 import img02 from "@assets/test-552-01.jpg";
 import img03 from "@assets/test-552-02.jpg";
 
-export const heroTitle: SectionTitle = {
+export const heroTitle: TitleProps = {
     id: "cleaning kits",
     title: "Наши клининговые комплекты",
     subtitle:
@@ -23,7 +23,6 @@ export const SectionImages = {
         height: 632,
         widths: [320, 440, 744, 1128, 2256],
         sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 744px, (max-width: 1128px) 1128px, 1128px",
-        format: "avif",
     },
     left: {
         src: img02,
@@ -31,8 +30,7 @@ export const SectionImages = {
         width: 552,
         height: 552,
         widths: [320, 440, 744, 1128, 2256],
-        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 381px, (max-width: 1128px) 552px,",
-        format: "avif",
+        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 381px, (max-width: 1128px) 552px",
     },
     right: {
         src: img03,
@@ -40,8 +38,7 @@ export const SectionImages = {
         width: 552,
         height: 552,
         widths: [320, 440, 744, 1128, 2256],
-        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 381px, (max-width: 1128px) 552px,",
-        format: "avif",
+        sizes: "(max-width: 320px) 320px, (max-width: 440px) 440px, (max-width: 768px) 381px, (max-width: 1128px) 552px",
     },
 };
 
