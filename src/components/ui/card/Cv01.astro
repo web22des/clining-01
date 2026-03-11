@@ -1,0 +1,38 @@
+---
+// src/components/ui/card/Cv01.astro
+
+export interface Cv01Props {
+    cardTitle: string;
+    cardIcon: string;
+}
+
+const { cardIcon = "_icon-image", cardTitle = "Заголовок карточки в две" } =
+    Astro.props;
+---
+
+<div class="cv01">
+    <span class={cardIcon}></span>
+    <p class="cv01__title">{cardTitle}</p>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/media-new.scss" as *;
+    .cv01 {
+        background-color: var(--md-sys-color-surface-variant);
+        border-radius: var(--border-radius-large);
+        box-shadow: var(--box-shadow-Light-01);
+        padding: 16px 8px;
+        text-align: center;
+        height: 100%;
+        display: flex;
+        flex-direction: column;
+        //width: 136px;
+        &__title {
+            display: block;
+            font-size: var(--font-size-lable-large);
+        }
+        span {
+            font-size: var(--font-size-display-medium);
+        }
+    }
+</style>

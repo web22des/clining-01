@@ -1,0 +1,200 @@
+---
+import Cv01 from "@components/ui/card/Cv01.astro";
+import type { Cv01Props } from "@components/ui/card/Cv01.astro";
+
+// src/components/templates/hv01/Hv01.astro
+
+export interface Hv01Props {
+    heroTitle: string;
+    heroSubtitle: string;
+
+    listSity: { text: string }[];
+
+    cards?: Cv01Props[];
+    cardDefaults?: {
+        cardIcon?: string;
+        cardTitle?: string;
+    };
+}
+
+const {
+    heroTitle = "Hero Title",
+    heroSubtitle = "Hero subtitle",
+
+    listSity = [
+        { text: "Город-1" },
+        { text: "Город-2" },
+        { text: "Город-3" },
+        { text: "Город-4" },
+        { text: "Город-5" },
+        { text: "Город-6" },
+        { text: "Город-7" },
+        { text: "Город-8" },
+    ],
+
+    cards = [
+        { cardIcon: "_icon-images", cardTitle: "Уборка домов и офисов" },
+        { cardIcon: "_icon-images", cardTitle: "Уборка Отелей и гостиниц" },
+        { cardIcon: "_icon-images", cardTitle: "Генеральная уборка" },
+        { cardIcon: "_icon-images", cardTitle: "Уборка после ремонта" },
+        { cardIcon: "_icon-images", cardTitle: "Химчистка мебели" },
+        { cardIcon: "_icon-images", cardTitle: "Химчистка мебели" },
+    ],
+} = Astro.props;
+---
+
+<div class="hv01">
+    <div class="hv01__container">
+        <h1>{heroTitle}</h1>
+        <h2>{heroSubtitle}</h2>
+        <ul class="hv01__list">
+            {
+                listSity.map((item: { text: string }) => (
+                    <li class="hv01__item">{item.text}</li>
+                ))
+            }
+        </ul>
+        <ul class="hv01__card-group">
+            {
+                cards.map((card: Cv01Props) => (
+                    <li class="hv01__card-item">
+                        <Cv01 {...card} />
+                    </li>
+                ))
+            }
+        </ul>
+    </div>
+</div>
+
+<style lang="scss">
+    @use "@styles/base/media-new.scss" as *;
+    .hv01 {
+        &__container {
+            background-color: var(--md-sys-color-on-secondary-fixed-variant);
+            border-radius: var(--border-radius-large);
+            padding: 32px 8px;
+            position: relative;
+            margin-bottom: var(--space-xxxl);
+            //767px и более
+            @media (min-width: $tablet-small) {
+                max-height: 632px;
+                padding: 86px;
+            }
+            h1 {
+                font-size: var(--font-size-display-large);
+                text-transform: uppercase;
+                text-align: start;
+                margin-bottom: var(--space-xxl);
+                color: var(--md-sys-color-secondary-fixed);
+                text-shadow: var(--text-shadow-Light-03);
+            }
+            h2 {
+                font-size: var(--font-size-display-medium);
+                margin-bottom: var(--space-xxl);
+                color: var(--md-sys-color-secondary-fixed-dim);
+                text-shadow: var(--text-shadow-Light-03);
+            }
+        }
+        &__list {
+            display: flex;
+            gap: var(--space-grid-gap);
+            flex-wrap: wrap;
+            max-width: 800px;
+            margin-bottom: 32px;
+        }
+
+        &__item {
+            font-size: var(--font-size-title-medium);
+            color: var(--md-sys-color-on-primary-container);
+            padding: 0 8px;
+            border-radius: 4px;
+            background-color: var(--md-sys-color-primary-container);
+            display: inline-block;
+            box-shadow: var(--box-shadow-Light-03);
+
+            //767px и более
+            @media (min-width: $tablet-small) {
+                display: flex;
+                align-items: center;
+                content: "\e9d7";
+                font-family: "icomoon";
+
+                padding: 16px;
+                border-radius: var(--border-radius-large);
+                &::before {
+                    padding-right: 4px;
+                    content: "\e9d7";
+                    font-size: 20px;
+                    left: 26px;
+                    top: 25px;
+                }
+            }
+        }
+
+        &__card-group {
+            //position: absolute;
+            //bottom: -80px;
+            //left: 96px;
+            padding-left: 8px;
+            padding-right: 8px;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: auto;
+            align-items: stretch;
+            gap: var(--space-grid-gap);
+            margin-bottom: -64px;
+            justify-items: stretch;
+            //justify-content: center;
+            //grid-template-rows: repeat(auto, 136px);
+        }
+    }
+
+    //359px и более
+    @media (min-width: $mobile-small) {
+    }
+
+    //411px и более
+    @media (min-width: $mobile-medium) {
+        .hv01 {
+            &__card-group {
+                grid-template-columns: repeat(2, 1fr);
+            }
+        }
+    }
+
+    //599px и более
+    @media (min-width: $mobile-large) {
+        .hv01 {
+            &__card-group {
+                max-width: 600px;
+                margin-left: auto;
+                margin-right: auto;
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+    }
+
+    //767px и более
+    @media (min-width: $tablet-small) {
+        .hv01 {
+            &__list {
+                margin-bottom: 84px;
+            }
+        }
+    }
+
+    //1023px и более
+    @media (min-width: $tablet-medium) {
+        .hv01 {
+            &__card-group {
+                max-width: 100%;
+                margin-left: auto;
+                margin-right: auto;
+                grid-template-columns: repeat(6, 1fr);
+            }
+            &__list {
+                margin-bottom: 150px;
+            }
+        }
+    }
+</style>
