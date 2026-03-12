@@ -1,0 +1,42 @@
+---
+// src/components/ui/tabs/tv01/Tv01.astro
+---
+
+<div data-tabs class="tabs">
+    <nav data-tabs-titles class="tabs__navigation" role="tablist">
+        <button type="button" class="tabs__title _tab-active">Таб №1</button>
+        <button type="button" class="tabs__title">Таб №2</button>
+        <button type="button" class="tabs__title">Таб №3</button>
+    </nav>
+    <div data-tabs-body class="tabs__content">
+        <div class="tabs__body">Содержимое 1</div>
+        <div class="tabs__body">Содержимое 2</div>
+        <div class="tabs__body">Содержимое 3</div>
+    </div>
+</div>
+
+<style lang="scss">
+    .tabs {
+        &__navigation {
+            padding: 8px 4px;
+            margin-bottom: 24px;
+            display: flex;
+            //flex-direction: column;
+            gap: 8px;
+        }
+        &__title {
+            display: inline-block;
+            font-size: var(--font-size-lable-large);
+            color: var(--md-sys-color-on-surface-variant);
+            padding: 6px 12px;
+            border: 1px solid var(--md-sys-color-on-surface-variant);
+            border-radius: var(--border-radius-medium);
+        }
+
+        &__title._tab-active {
+            border: 1px solid var(--md-sys-color-primary);
+            background-color: var(--md-sys-color-primary);
+            color: var(--md-sys-color-on-primary);
+        }
+    }
+</style>

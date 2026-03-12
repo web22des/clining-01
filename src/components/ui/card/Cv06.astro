@@ -1,0 +1,31 @@
+---
+// src/components/ui/card/Cv06.astro
+
+export interface Cv06Title {
+    title?: string;
+    descr?: string;
+}
+
+const {
+    title = "Заголовок карточки",
+    descr = "Веб-разработка — это искусство скрывать сложность. Пользователь ценит удобство, а не код. Чистая архитектура, доступность и скорость - ключ к успеху.",
+} = Astro.props;
+---
+
+<div class="cv06">
+    <h3 class="cv06__title">{title}</h3>
+    <p class="cv06__descr">{descr}</p>
+</div>
+
+<style lang="scss">
+    .cv06 {
+        background-color: var(--md-sys-color-surface);
+        box-shadow: var(--box-shadow-Light-01);
+        border-radius: var(--border-radius-large);
+        padding: var(--space-sm);
+        &__title {
+            font-size: var(--font-size-headline-small);
+            margin-bottom: var(--space-lg);
+        }
+    }
+</style>

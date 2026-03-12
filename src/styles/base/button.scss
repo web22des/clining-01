@@ -149,3 +149,21 @@
 <button class="button button--lg">Большая</button>
 
 */
+
+.connected-segment {
+    color: var(--md-sys-color-on-secondary-container);
+    background-color: var(--md-sys-color-secondary-container);
+    &:hover {
+        background-color: var(--md-sys-color-primary);
+        color: var(--md-sys-color-on-primary);
+    }
+    &--xsmall {
+        padding: 6px 12px;
+        font-size: var(--font-size-lable-large);
+        border-radius: 4px;
+        transition: var(--transition-duration-fast);
+        &:hover {
+            border-radius: 12px;
+        }
+    }
+}
