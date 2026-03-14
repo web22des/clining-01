@@ -19,6 +19,8 @@ export interface Cv100Props {
 }
 
 const {
+    title,
+    descr,
     btntext = "connected-segment",
     src = img01,
     alt = "описание изображения",
@@ -32,7 +34,7 @@ const {
         <Image src={src} , alt={alt} , width={width} ,height={height} />
     </div>
     <div class="cv100__wrapper">
-        <Cv06 />
+        <Cv06 {title} {descr} />
         <button class="connected-segment connected-segment--xsmall"
             >{btntext}</button
         >

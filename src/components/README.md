@@ -8,31 +8,76 @@
 
 ## ⚡ Быстрый старт (5 шагов)
 
-1.  **Создай файл** в правильной папке: `src/components/ui/ComponentName/ComponentName.astro`
-2.  **Опиши интерфейс:** `export interface Props { ... }`
-3.  **Импортируй зависимости:** `import type` для типов, `import` для компонентов
+1.  **Создай файл** в правильной папке: `src/components/ui/componentName/ComponentName.astro`
+2.  **Опиши интерфейс:** `export interface ComponentNameProps { ... }`
+3.  **Импортируй зависимости:** `import type {Props as ComponentName` для типов, `import` для компонентов
 4.  **Сделай деструктуризацию:** `const { title, href } = Astro.props`
 5.  **Проверь данные:** Валидация `id`, импорт изображений через `import`
 
 ---
 
+## Нейминг компонентов
+
+Структура правильного нейминга, разбиты на уровни: от "Атомов" до Секций
+
+| Уровень | Категория | Имя (v1) | Путь в проекте | Назначение |
+| :-- | :-- | :-- | :-- | :-- |
+| **Атомы** | Кнопка | `BtnV01.astro` | `@ui/button/BtnV01.astro` | Базовая кнопка (link/button) |
+|  | Заголовок секции | `STitleV01.astro` | `@ui/title/STitleV01.astro` | Заголовок + подзаголовок + декор |
+|  | Поле ввода | `InpV01.astro` | `@ui/input/InpV01.astro` | Текстовое поле формы |
+|  | Иконка | `IconV01.astro` | `@ui/icon/IconV01.astro` | SVG-иконка (спрайт/инлайн) |
+|  | Бейдж | `BadgeV01.astro` | `@ui/badge/BadgeV01.astro` | Метка (new, sale, tag) |
+|  | Ссылка | `LinkV01.astro` | `@ui/link/LinkV01.astro` | Текстовая ссылка |
+| **Молекулы** | Карточка | `CardV01.astro` | `@ui/card/CardV01.astro` | Карточка услуги/товара |
+|  | Табы | `TabV01.astro` | `@ui/tabs/TabV01.astro` | Переключатель вкладок |
+|  | Аккордеон | `AccV01.astro` | `@ui/accordion/AccV01.astro` | Раскрывающийся список |
+|  | Форма | `FormV01.astro` | `@ui/form/FormV01.astro` | Обёртка формы (валидация) |
+|  | Модалка | `ModalV01.astro` | `@ui/modal/ModalV01.astro` | Всплывающее окно |
+| **Секции** | Геро-блок | `HeroV01.astro` | `@components/sections/HeroV01.astro` | Первый экран (Unique) |
+|  | Секция (Шаблон) | `Sv01.astro` | `@components/sections/Sv01.astro` | Универсальная сетка-обёртка |
+|  | Хедер | `HeaderV01.astro` | `@components/partials/HeaderV01.astro` | Шапка сайта |
+|  | Футер | `FooterV01.astro` | `@components/partials/FooterV01.astro` | Подвал сайта |
+| **Обёртки** | О проекте | `About.astro` | `templates/About.astro` | Контентная секция (Реальный сайт) |
+|  | Команда | `Team.astro` | `templates/Team.astro` | Контентная секция (Реальный сайт) |
+|  | Услуги | `Services.astro` | `templates/Services.astro` | Контентная секция (Реальный сайт) |
+| **Данные** | Файл данных | `AboutData.ts` | `data/sections/about/AboutData.ts` | Данные для секции (camelCase) |
+
 ## 📂 Структура папок компонентов
 
-```astro
-📦src/components
-┣ 📂ui/ # UI-компоненты (атомы)
-┃ ┣ 📂button/ # Кнопки
-┃ ┣ 📂card/ # Карточки
-┃ ┣ 📂SectionHeader/ # Заголовки секций
-┃ ┗ 📂Link/ # Ссылки
-┣ 📂sections/ # Готовые секции (блоки)
-┃ ┣ 📂Hero/
-┃ ┣ 📂Services/
-┃ ┗ 📂Contacts/
-┗ 📂partials/ # Части страниц
-┃ ┣ 📜Header.astro
-┃ ┣ 📜Footer.astro
-┃ ┗ 📜Head.astro
+```ts
+📦 src/components
+ ┣ 📂ui
+ ┃ ┣ 📂button
+ ┃ ┃ ┗ 📜 BtnV01.astro
+ ┃ ┣ 📂title
+ ┃ ┃ ┗ 📜 STitleV01.astro
+ ┃ ┣ 📂card
+ ┃ ┃ ┗ 📜 CardV01.astro
+ ┃ ┣ 📂tabs
+ ┃ ┃ ┗ 📜 TabV01.astro
+ ┃ ┣ 📂input
+ ┃ ┃ ┗ 📜 InpV01.astro
+ ┃ ┣ 📂icon
+ ┃ ┃ ┗ 📜 IconV01.astro
+ ┃ ┣ 📂badge
+ ┃ ┃ ┗ 📜 BadgeV01.astro
+ ┃ ┣ 📂link
+ ┃ ┃ ┗ 📜 LinkV01.astro
+ ┃ ┣ 📂accordion
+ ┃ ┃ ┗ 📜 AccV01.astro
+ ┃ ┣ 📂form
+ ┃ ┃ ┗ 📜 FormV01.astro
+ ┃ ┗ 📂modal
+ ┃ ┃ ┗ 📜 ModalV01.astro
+ ┣ 📂sections
+ ┃ ┣ 📜 Hero.astro // секция обертка
+ ┃ ┗ 📜 AboutUs.astro
+  ┣ 📂templates
+ ┃ ┣ 📜 HeroV01.astro
+ ┃ ┗ 📜 Sv01.astro
+ ┗ 📂partials
+ ┃ ┣ 📜 HeaderV01.astro
+ ┃ ┗ 📜 FooterV01.astro
 ```
 
 ---
@@ -41,23 +86,24 @@
 
 | Тип | Путь | Пример | Назначение |
 | --- | --- | --- | --- |
-| **UI-атомы** | `ui/button/`, `ui/input/` | Кнопки, формы, иконки | Базовые элементы интерфейса |
-| **UI-карточки** | `ui/card/` | Услуги, товары, отзывы | Контентные блоки с данными |
-| **UI-типографика** | `ui/SectionHeader/` | Заголовки секций | Единый стиль заголовков |
-| **Секции** | `sections/` | Hero, Features, Pricing | Готовые блоки для лендинга |
-| **Partials** | `partials/` | Header, Footer, Head | Части layouts страниц |
+| **UI-атомы** | `@ui/button/`, `@ui/input/` | Кнопки, формы, иконки | Базовые элементы интерфейса |
+| **UI-карточки** | `@ui/card/` | Услуги, товары, отзывы | Контентные блоки с данными |
+| **UI-типографика** | `@ui/title/` | Заголовки секций | Единый стиль заголовков |
+| **UI-сложные компоненты-секции** | `@components/templates/sv01/Sv01.astro` | Готовые секции | Единый стиль заголовков |
+| **Секции** | `@components/sections/` | Hero, Features, Pricing | Готовые блоки для лендинга |
+| **Partials** | `@components/partials/` | Header, Footer, Head | Части layouts страниц |
 
 ---
 
 ## 📝 Специфичные требования по типам
 
-### 🎴 Карточки (`ui/card/`)
+### 🎴 Карточки (`@ui/card/`)
 
 **Минимальные требования:**
 
 - [ ] Поле `id: string` (уникальное, kebab-case)
 - [ ] Тип изображения: `ImageMetadata` (импорт, не строка!)
-- [ ] Валидация `id` в файле данных через утилиту
+- [ ] Валидация `id` в файле данных через утилиту (если это товары или карточек более 10)
 - [ ] Поддержка адаптивности (вертикальная/горизонтальная)
 - [ ] Текст кнопки (`linkText`) выносится в данные
 
@@ -81,11 +127,12 @@ export interface Props {
 
 ```astro
 ---
+// src/components/ui/card/CardvTest.astro
 import Link from "../Link.astro";
 import Images from "../Images.astro";
 import type { ImageMetadata } from "astro";
 
-export interface Props {
+export interface CardVTestProps {
     id: string;
     title: string;
     subTitle: string;
@@ -119,7 +166,7 @@ const { id, title, subTitle, href, linkText, image, imageAlt, imageWidth, imageH
 - Не хардкодить текст — передавать из данных секции **Пример интерфейса:**
 
 ```ts
-export interface Props {
+export interface STitleV01Props {
     title: string;
     subtitle?: string;
     tag?: "h1" | "h2" | "h3";
@@ -131,7 +178,7 @@ export interface Props {
 
 ```astro
 ---
-export interface Props {
+export interface NameSectionProps {
     title: string;
     subtitle?: string;
     tag?: 'h1' | 'h2' | 'h3';
@@ -141,9 +188,9 @@ export interface Props {
 const { title, subtitle, tag: HeadingTag = 'h2', align = 'center' } = Astro.props;
 ---
 
-<div class="section-header" data-align={align}>
-    {subtitle && <p class="section-header__subtitle">{subtitle}</p>}
-    <HeadingTag class="section-header__title">{title}</HeadingTag>
+<div class="s-title-v01" data-align={align}>
+    {subtitle && <p class="s-title-v01__subtitle">{subtitle}</p>}
+    <HeadingTag class="s-title-v01__title">{title}</HeadingTag>
 </div>
 ```
 
@@ -152,22 +199,22 @@ const { title, subtitle, tag: HeadingTag = 'h2', align = 'center' } = Astro.prop
 **Минимальные требования:**
 
 - Данные в `src/data/sections/{name}/data.ts`
-- Якорный `id` на самой секции (для ссылок из меню)
+- Якорный `id` на самой секции (для ссылок из меню(опционально))
 - Импорт типов из UI-компонентов `(import type { Props })`
 - Валидация данных при сборке (проверка `id`, обязательных полей)
-- Заголовок секции — через компонент `SectionHeader`
+- Заголовок секции — через компонент `STitleV01Props`
 
 **Пример структуры секции:**
 
 ```astro
 ---
-import SectionHeader from "@/components/ui/SectionHeader/SectionHeader.astro";
-import CardVar02 from "@/components/ui/card/CardVar02.astro";
-import { cardsData, sectionConfig } from "@/data/sections/services/data";
+import STitleV01Props from "@/components/ui/title/STitleV01Props.astro";
+import CardVar02 from "@/components/ui/card/CardV02.astro";
+import { cardsData, sectionConfig } from "@/data/sections/services/servicesData.ts";
 ---
 
-<section id="services" class="section services-section">
-    <div class="container">
+<section id="services" class="services">
+    <div class="services__container">
         <SectionHeader
             title={sectionConfig.title}
             subtitle={sectionConfig.subtitle}
@@ -334,12 +381,12 @@ validateCardsData(cardsData);
 
 | Объект | Формат | Пример |
 | --- | --- | --- |
-| Папка компонента | `PascalCase` | `ui/CardVar02/, sections/Hero/` |
+| Папка компонента | `PascalCase` | `@ui/CardVar02/, sections/Hero/` |
 | ID элемента | `kebab-case` | `service-dev`, `portfolio-item-1` |
 | Файл данных | `kebab-case` | `services-data.ts` или `data.ts` внутри папки |
 | Папка данных | `kebab-case` | `src/data/sections/services/` |
 | CSS классы | `kebab-case` | `.card-var-02`, .`section-header` |
-| Переменные TS | c`amelCase` | `cardsData`, `sectionConfig` |
+| Переменные TS | `сamelCase` | `cardsData`, `sectionConfig` |
 | SCSS миксины | `kebab-case` | `@include max-width()`, `@include between-widths()` |
 
 ### ⛔ Запрещённые приёмы (Памятка)
@@ -384,8 +431,8 @@ import CardVar02, {
 
 ```ts
 // ✅ Коротко и понятно (если настроен tsconfig.json)
-import Comp from "@/components/ui/Comp.astro";
-import data from "@/data/sections/services/data";
+import Comp from "@components/ui/Comp.astro";
+import data from "@data/sections/services/data";
 
 // ❌ Длинные относительные пути (избегать)
 import Comp from "../../../components/ui/Comp.astro";
@@ -401,11 +448,11 @@ import Comp from "../../../components/ui/Comp.astro";
  ┣ 📜navigation.ts           # Меню навигации (header, footer)
  ┗ 📂sections
  ┃ ┣ 📂hero/
- ┃ ┃ ┗ 📜data.ts
+ ┃ ┃ ┗ 📜heroData.ts
  ┃ ┣ 📂services/
- ┃ ┃ ┗ 📜data.ts
+ ┃ ┃ ┗ 📜serviceData.ts
  ┃ ┗ 📂portfolio/
- ┃ ┃ ┗ 📜data.ts
+ ┃ ┃ ┗ 📜portfolioData.ts
 ```
 
 **Пример файла данных**
@@ -413,7 +460,7 @@ import Comp from "../../../components/ui/Comp.astro";
 ```ts
 // src/data/sections/services/data.ts
 import type { Props as CardProps } from "@/components/ui/card/CardVar02.astro";
-import { validateCardsData } from "@/utils/validate-data";
+import { validateCardsData } from "@/utils/validate-data"; // если карточек много
 import cardImage01 from "@assets/sections/service-1.jpg";
 import cardImage02 from "@assets/sections/service-2.jpg";
 
@@ -423,12 +470,12 @@ const cardDefaults = {
     imageHeight: 480,
 } as const;
 
-export const sectionConfig = {
+export const STitleV01Data = {
     title: "Наши услуги",
     subtitle: "Что мы предлагаем",
 };
 
-export const cardsData: CardProps[] = [
+export const cardsData: CardV01Props[] = [
     {
         ...cardDefaults,
         id: "service-dev",
@@ -450,7 +497,7 @@ export const cardsData: CardProps[] = [
 ];
 
 // ✅ Валидация при сборке
-validateCardsData(cardsData);
+validateCardsData(cardsData); // использовать как опцию
 ``;
 ```
 
@@ -473,7 +520,7 @@ import cardImage01 from "@assets/sections/service-1.jpg";
 
 **Код компонента**
 
-- Интерфейс `Props` экспортирован (`export interface`)
+- Интерфейс `{NameComponents}Props` экспортирован (`export interface`)
 - Типы импортированы через `import type`
 - Компоненты импортированы через обычный `import`
 - Использована деструктуризация `Astro.props`
@@ -487,9 +534,7 @@ import cardImage01 from "@assets/sections/service-1.jpg";
 - Видимый фокус на интерактивных элементах
 - Семантические теги (<`nav>`, `<main>`, `<button>`)
 - Иерархия заголовков без пропусков **Конфигурация**
-- `tsconfig.json` без пробелов в кавычках
-- Алиасы (`@/...`) работают
-- `astro.config.mjs`: проверен `base` (имя репозитория)
+- Алиасы (`/...`) работают
 
 **Быстрый тест**
 
@@ -505,3 +550,4 @@ npm run dev  # Запусти сервер
 | Версия | Дата       | Изменения               |
 | ------ | ---------- | ----------------------- |
 | 1.0.0  | 2026/03/02 | Первая версия методички |
+| 1.0.1  | 2026/03/14 | -                       |

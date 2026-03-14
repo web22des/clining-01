@@ -1,5 +1,4 @@
 // src/data/sections/cleaning-expertise/cleaning-expertiseData.ts
-import type { TitleProps } from "@components/ui/title/SectionTitleVar01.astro";
 import type { PropsSv08 } from "@components/templates/sv08/Sv08.astro";
 import images01 from "@assets/blog-placeholder-5.jpg";
 import images02 from "@assets/blog-placeholder-2.jpg";

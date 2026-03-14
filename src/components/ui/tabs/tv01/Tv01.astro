@@ -15,6 +15,8 @@ export interface TabItem {
     id: string; // Уникальный ID (kebab-case)
     title: string; // Заголовок кнопки таба
     cardData: {
+        title: string;
+        descr: string;
         btntext: string;
         src: ImageMetadata;
         alt: string;
@@ -36,6 +38,8 @@ const defaultTabs: TabItem[] = [
         id: "tab-01",
         title: "Таб №1",
         cardData: {
+            title: "Card Title 1",
+            descr: "card description 1",
             btntext: "Подробнее",
             src: img01,
             alt: "Описание изображения 1",
@@ -47,6 +51,8 @@ const defaultTabs: TabItem[] = [
         id: "tab-02",
         title: "Таб №2",
         cardData: {
+            title: "Card Title 2",
+            descr: "card description 2",
             btntext: "Подробнее",
             src: img02,
             alt: "Описание изображения 2",
@@ -58,6 +64,8 @@ const defaultTabs: TabItem[] = [
         id: "tab-03",
         title: "Таб №3",
         cardData: {
+            title: "Card Title 3",
+            descr: "card description 3",
             btntext: "Подробнее",
             src: img03,
             alt: "Описание изображения 3",
@@ -69,6 +77,8 @@ const defaultTabs: TabItem[] = [
         id: "tab-04",
         title: "Таб №4",
         cardData: {
+            title: "Card Title 4",
+            descr: "card description 4",
             btntext: "Подробнее",
             src: img04,
             alt: "Описание изображения 4",
@@ -80,6 +90,8 @@ const defaultTabs: TabItem[] = [
         id: "tab-05",
         title: "Таб №5",
         cardData: {
+            title: "Card Title 5",
+            descr: "card description 5",
             btntext: "Подробнее",
             src: img05,
             alt: "Описание изображения 5",

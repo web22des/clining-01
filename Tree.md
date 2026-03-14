@@ -1,4 +1,4 @@
-```astro
+```ts
 📦src
  ┣ 📂assets
  ┃ ┣ 📂programming
@@ -10,29 +10,99 @@
  ┃ ┃ ┃ ┗ 📜03.jpg
  ┃ ┃ ┣ 📂test
  ┃ ┃ ┗ 📜test-01.jpg
+ ┃ ┣ 📂temp
+ ┃ ┃ ┣ 📂avatars
+ ┃ ┃ ┃ ┣ 📜av-01.png
+ ┃ ┃ ┃ ┣ 📜av-02.png
+ ┃ ┃ ┃ ┣ 📜av-03.png
+ ┃ ┃ ┃ ┣ 📜av-04.png
+ ┃ ┃ ┃ ┗ 📜av-05.png
+ ┃ ┃ ┣ 📂images
+ ┃ ┃ ┃ ┣ 📜360-01.jpg
+ ┃ ┃ ┃ ┣ 📜360-02.jpg
+ ┃ ┃ ┃ ┣ 📜360х168-01.jpg
+ ┃ ┃ ┃ ┣ 📜360х168-02.jpg
+ ┃ ┃ ┃ ┣ 📜552x360-01.jpg
+ ┃ ┃ ┃ ┣ 📜552x360-02.jpg
+ ┃ ┃ ┃ ┣ 📜552x360-03.jpg
+ ┃ ┃ ┃ ┣ 📜552x360-04.jpg
+ ┃ ┃ ┃ ┣ 📜552x360-05.jpg
+ ┃ ┃ ┃ ┗ 📜rutube.jpg
+ ┃ ┃ ┗ 📂logo
  ┃ ┣ 📜blog-placeholder-1.jpg
  ┃ ┣ 📜blog-placeholder-2.jpg
  ┃ ┣ 📜blog-placeholder-3.jpg
  ┃ ┣ 📜blog-placeholder-4.jpg
  ┃ ┣ 📜blog-placeholder-5.jpg
- ┃ ┗ 📜blog-placeholder-about.jpg
+ ┃ ┣ 📜blog-placeholder-about.jpg
+ ┃ ┣ 📜test-1920.jpg
+ ┃ ┣ 📜test-552-01.jpg
+ ┃ ┣ 📜test-552-02.jpg
+ ┃ ┣ 📜test_img-01.jpg
+ ┃ ┣ 📜test_img-02.jpg
+ ┃ ┣ 📜test_img-03.jpg
+ ┃ ┗ 📜test_img-04.jpg
  ┣ 📂components
  ┃ ┣ 📂partials
  ┃ ┃ ┣ 📜Footer.astro
  ┃ ┃ ┣ 📜Head.astro
  ┃ ┃ ┗ 📜Header.astro
  ┃ ┣ 📂sections
+ ┃ ┃ ┣ 📂SectionVar02
+ ┃ ┃ ┃ ┣ 📜SectionVar02.astro
+ ┃ ┃ ┃ ┗ 📜docsVar02.md
  ┃ ┃ ┣ 📂SectionVar03
  ┃ ┃ ┃ ┗ 📜SectionVar03.astro
- ┃ ┃ ┣ 📂SectionVar04
- ┃ ┃ ┣ 📜SectionVar02.astro
+ ┃ ┃ ┣ 📂advantages
+ ┃ ┃ ┃ ┗ 📜Advantages.astro
+ ┃ ┃ ┣ 📂cleaning-expertise
+ ┃ ┃ ┃ ┗ 📜Cleaning-expertise.astro
+ ┃ ┃ ┣ 📂hero
+ ┃ ┃ ┃ ┗ 📜Hero.astro
+ ┃ ┃ ┣ 📂sta-02
+ ┃ ┃ ┃ ┗ 📜Sta02.astro
+ ┃ ┃ ┣ 📂team-tabs
+ ┃ ┃ ┃ ┗ 📜TeamTabs.astro
+ ┃ ┃ ┣ 📂test-tabs
+ ┃ ┃ ┃ ┗ 📜TestTabs.astro
+ ┃ ┃ ┣ 📂testdev
+ ┃ ┃ ┃ ┗ 📜TestDev.astro
+ ┃ ┃ ┣ 📂vizitka
+ ┃ ┃ ┃ ┗ 📜Vizitka.astro
+ ┃ ┃ ┣ 📜SectionFull.astro
+ ┃ ┃ ┣ 📜SectionVar04.astro
  ┃ ┃ ┗ 📜index.ts
+ ┃ ┣ 📂templates
+ ┃ ┃ ┣ 📂hv01
+ ┃ ┃ ┃ ┗ 📜Hv01.astro
+ ┃ ┃ ┣ 📂sv05
+ ┃ ┃ ┃ ┣ 📜Sv05.astro
+ ┃ ┃ ┃ ┣ 📜docs_sv05.md
+ ┃ ┃ ┃ ┗ 📜sv05-temp.ts
+ ┃ ┃ ┣ 📂sv06
+ ┃ ┃ ┃ ┗ 📜Sv06.astro
+ ┃ ┃ ┣ 📂sv07
+ ┃ ┃ ┃ ┗ 📜Svo7.astro
+ ┃ ┃ ┣ 📂sv08
+ ┃ ┃ ┃ ┗ 📜Sv08.astro
+ ┃ ┃ ┗ 📂sv09
+ ┃ ┃ ┃ ┗ 📜Sv09.astro
  ┃ ┣ 📂ui
  ┃ ┃ ┣ 📂FeatureList
  ┃ ┃ ┃ ┣ 📜FeatureList.astro
  ┃ ┃ ┃ ┗ 📜FeatureList.astro.md
  ┃ ┃ ┣ 📂card
- ┃ ┃ ┃ ┗ 📜CardVar02.astro
+ ┃ ┃ ┃ ┣ 📜CardVar02.astro
+ ┃ ┃ ┃ ┣ 📜CardVar03.astro
+ ┃ ┃ ┃ ┣ 📜CardVar04.astro
+ ┃ ┃ ┃ ┣ 📜Cv01.astro
+ ┃ ┃ ┃ ┣ 📜Cv05.astro
+ ┃ ┃ ┃ ┣ 📜Cv06.astro
+ ┃ ┃ ┃ ┗ 📜Cv100.astro
+ ┃ ┃ ┣ 📂tabs
+ ┃ ┃ ┃ ┣ 📂test
+ ┃ ┃ ┃ ┗ 📂tv01
+ ┃ ┃ ┃ ┃ ┗ 📜Tv01.astro
  ┃ ┃ ┣ 📂title
  ┃ ┃ ┃ ┣ 📜SectionTitleVar01.astro
  ┃ ┃ ┃ ┗ 📜SectionTitleVar02.astro
@@ -53,8 +123,23 @@
  ┃ ┗ 📂test
  ┣ 📂data
  ┃ ┣ 📂sections
- ┃ ┃ ┗ 📂SectionVar03
+ ┃ ┃ ┣ 📂SectionFull
  ┃ ┃ ┃ ┗ 📜data.ts
+ ┃ ┃ ┣ 📂SectionVar03
+ ┃ ┃ ┃ ┗ 📜data.ts
+ ┃ ┃ ┣ 📂advantages
+ ┃ ┃ ┃ ┗ 📜advantagesData.ts
+ ┃ ┃ ┣ 📂cleaning-expertise
+ ┃ ┃ ┃ ┗ 📜cleaning-expertiseData.ts
+ ┃ ┃ ┣ 📂hero
+ ┃ ┃ ┃ ┗ 📜heroData.ts
+ ┃ ┃ ┣ 📂sta02
+ ┃ ┃ ┃ ┗ 📜sta02Data.ts
+ ┃ ┃ ┣ 📂team-tabs
+ ┃ ┃ ┃ ┗ 📜teamTabsData.ts
+ ┃ ┃ ┣ 📂vizitka
+ ┃ ┃ ┃ ┗ 📜visitkaData.ts
+ ┃ ┃ ┗ 📜StaVar02.ts
  ┃ ┣ 📂test
  ┃ ┣ 📜README.md
  ┃ ┣ 📜navigation.ts
@@ -109,7 +194,9 @@
  ┃ ┗ 📜global.scss
  ┣ 📂utils
  ┃ ┣ 📜index.ts
+ ┃ ┣ 📜tv01.ts
  ┃ ┗ 📜validate-data.ts
  ┣ 📜consts.ts
  ┗ 📜content.config.ts
+
 ```
