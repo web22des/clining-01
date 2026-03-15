@@ -1,0 +1,149 @@
+---
+// src/components/partials/HeadTheme.astro
+import "@styles/global.scss";
+
+export interface Props {
+    title?: string;
+    description?: string;
+    canonicalUrl?: string | URL;
+    noIndex?: boolean;
+    keywords?: string;
+}
+
+// Используем переданные значения или дефолты
+const {
+    title = "Сборник курсов",
+    description = "Сборник различных курсов на разные темы",
+    canonicalUrl = new URL(Astro.url.pathname, Astro.site),
+    noIndex = false,
+    keywords = "курсы, обучение, программирование",
+} = Astro.props;
+const basePath = import.meta.env.BASE_URL;
+---
+
+<!-- Global Metadata -->
+<meta charset="utf-8" />
+<!--  -->
+
+<script is:inline>
+    (function () {
+        console.log("🎨 [Switcher] Script loaded");
+
+        // ✅ Синхронизация радио-кнопок с текущей темой
+        function syncSwitcher() {
+            console.log("🎨 [Switcher] syncSwitcher started");
+            var saved = localStorage.getItem("theme");
+            var version = "v_01";
+            var mode = "light";
+
+            if (saved) {
+                try {
+                    var parsed = JSON.parse(saved);
+                    version = parsed.version || "v_01";
+                    mode = parsed.mode || "light";
+                    console.log("🎨 [Switcher] Parsed:", parsed);
+                } catch (e) {
+                    console.warn("🎨 [Switcher] JSON parse error:", e);
+                    localStorage.removeItem("theme");
+                }
+            }
+
+            var selector =
+                'input[name="theme-version"][value="' + version + '"]';
+            var checked = document.querySelector(selector);
+            console.log("🎨 [Switcher] Found checkbox:", checked);
+            if (checked) {
+                checked.checked = true;
+            }
+        }
+
+        // ✅ Обработчик переключения
+        function initSwitcher() {
+            console.log("🎨 [Switcher] initSwitcher started");
+            var inputs = document.querySelectorAll(
+                'input[name="theme-version"]',
+            );
+            console.log("🎨 [Switcher] Found inputs:", inputs.length);
+
+            for (var i = 0; i < inputs.length; i++) {
+                inputs[i].addEventListener("change", function (e) {
+                    console.log("🎨 [Switcher] CHANGE EVENT FIRED!");
+                    var newVersion = e.target.value;
+                    console.log("🎨 [Switcher] New version:", newVersion);
+
+                    var saved = localStorage.getItem("theme");
+                    var currentTheme = { version: "v_01", mode: "light" };
+
+                    if (saved) {
+                        try {
+                            currentTheme = JSON.parse(saved);
+                        } catch (e) {
+                            console.warn(
+                                "🎨 [Switcher] Parse error on click:",
+                                e,
+                            );
+                        }
+                    }
+
+                    var newTheme = {
+                        version: newVersion,
+                        mode: currentTheme.mode,
+                    };
+                    localStorage.setItem("theme", JSON.stringify(newTheme));
+                    console.log(
+                        "🎨 [Switcher] Saved to localStorage:",
+                        newTheme,
+                    );
+
+                    document.documentElement.setAttribute(
+                        "data-theme-version",
+                        newVersion,
+                    );
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        currentTheme.mode,
+                    );
+                    console.log("🎨 [Switcher] Attributes set on html");
+                });
+            }
+        }
+
+        // ✅ Инициализация
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", function () {
+                console.log("🎨 [Switcher] DOMContentLoaded");
+                syncSwitcher();
+                initSwitcher();
+            });
+        } else {
+            console.log("🎨 [Switcher] DOM already loaded");
+            syncSwitcher();
+            initSwitcher();
+        }
+    })();
+</script>
+
+<!--  -->
+
+<!--  -->
+<meta name="viewport" content="width=device-width,initial-scale=1" />
+<link rel="sitemap" href="sitemap-index.xml" />
+<meta name="generator" content={Astro.generator} />
+
+<!-- Базовые иконки -->
+<link rel="icon" href=`${basePath}/favicon/favicon.ico` sizes="any" />
+<link rel="icon" href=`${basePath}/favicon/favicon.svg` type="image/svg+xml" />
+
+<!-- Адаптивные иконки -->
+<link rel="apple-touch-icon" href=`${basePath}/favicon/apple-touch-icon.png` />
+<link rel="manifest" href=`${basePath}/favicon/site.webmanifest` />
+
+<!-- Canonical URL -->
+<link rel="canonical" href={canonicalUrl} />
+
+{/* SEO Tags */}
+<title>{title}</title>
+<meta name="title" content={title} />
+<meta name="description" content={description} />
+<meta name="keywords" content={keywords} />
+{noIndex && <meta name="robots" content="noindex, nofollow" />}

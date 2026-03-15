@@ -11,9 +11,10 @@ import Hero from "@components/sections/hero/Hero.astro";
 
 import TestDev from "@components/sections/testdev/TestDev.astro";
 import TeamTabs from "@components/sections/team-tabs/TeamTabs.astro";
+import PagesLayoutTheme from "@layouts/PagesLayoutTheme.astro";
 ---
 
-<PagesLayout
+<PagesLayoutTheme
     seo={{
         title: "Клининг - добавь чистоты в доме",
         description: "Свяжитесь с нами для сотрудничества",
@@ -33,4 +34,4 @@ import TeamTabs from "@components/sections/team-tabs/TeamTabs.astro";
     <TeamTabs />
 
     <!-- <TestDev /> -->
-</PagesLayout>
+</PagesLayoutTheme>

@@ -1,9 +1,26 @@
+// src/styles/global.scss
 @use "@styles/base/null.scss";
-@use "@styles/themes/v_01/light.scss";
-@use "@styles/themes/v_01/dark.scss";
+
+@use "@styles/themes/v_01/light.scss" as v01-light;
+@use "@styles/themes/v_01/dark.scss" as v01-dark;
+
+@use "@styles/themes/v_02/light.scss" as v02-light;
+@use "@styles/themes/v_02/dark.scss" as v02-dark;
+
+@use "@styles/themes/v_03/light.scss" as v03-light;
+@use "@styles/themes/v_03/dark.scss" as v03-dark;
+
+@use "@styles/themes/v_04/light.scss" as v04-light;
+@use "@styles/themes/v_04/dark.scss" as v04-dark;
+
+@use "@styles/themes/v_05/light.scss" as v05-light;
+@use "@styles/themes/v_05/dark.scss" as v05-dark;
+
 @use "@styles/fonts/fonts.scss";
 @use "@styles/fonts/icons.scss";
 @use "@styles/base/variables.scss";
 
 @use "@styles/base/common.scss";
 @use "@styles/base/button.scss";
+
+// "mode":"dark","version":"v_01"

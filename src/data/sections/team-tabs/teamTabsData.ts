@@ -81,3 +81,4 @@ export const teamTabsData: TeamTabsDataProps = {
         },
     ],
 };
+// тварь, сука, соска,блядина, давалка

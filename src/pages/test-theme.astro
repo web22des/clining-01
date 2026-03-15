@@ -1,0 +1,63 @@
+---
+import PagesLayoutTheme from "@layouts/PagesLayoutTheme.astro";
+import ThemeVersionSwitcher from "@ui/ThemeVersionSwitcher.astro";
+//
+---
+
+<PagesLayoutTheme
+    seo={{
+        title: "тест темы",
+        description: "Свяжитесь с нами для сотрудничества",
+        keywords: "контакты, связь, сотрудничество",
+        noIndex: false,
+    }}
+>
+    <div class="tw7">
+        <div class="tw7__container">
+            <h1>Тестовая страница переключения цветовой темы</h1>
+
+            <div class="tw7__wrapper">
+                <div class="tw7__col tw7__col--primary"></div>
+                <div class="tw7__col tw7__col--secondary"></div>
+                <div class="tw7__col tw7__col--tertiary"></div>
+                <div class="tw7__col tw7__col--error"></div>
+            </div>
+            <ThemeVersionSwitcher />
+        </div>
+    </div>
+</PagesLayoutTheme>
+
+<style lang="scss">
+    h1 {
+        color: var(--md-sys-color-primary);
+    }
+
+    .tw7 {
+        &__container {
+        }
+        &__wrapper {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            grid-template-rows: repeat(2, 1fr);
+            gap: var(--space-grid-gap);
+        }
+        &__col {
+            width: 100%;
+            height: 200px;
+            border-radius: var(--border-radius-large);
+        }
+
+        &__col--primary {
+            background-color: var(--md-sys-color-primary);
+        }
+        &__col--secondary {
+            background-color: var(--md-sys-color-secondary);
+        }
+        &__col--tertiary {
+            background-color: var(--md-sys-color-tertiary);
+        }
+        &__col--error {
+            background-color: var(--md-sys-color-error);
+        }
+    }
+</style>

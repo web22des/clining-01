@@ -1,0 +1,169 @@
+---
+// src/components/ui/ThemeVersionSwitcher.astro
+
+// Переключатель версий цветовой схемы (v_01 - v_05)
+
+import type { ThemeVersion } from "@utils/theme";
+
+export interface Props {
+    class?: string;
+    currentVersion?: ThemeVersion;
+}
+
+const { class: className = "", currentVersion = "v_01" } = Astro.props;
+
+// ✅ Данные тем (вынесены для удобства правки)
+const themes = [
+    { value: "v_01", label: "Дефолт", color: "#e0e0e0" },
+    { value: "v_02", label: "Весна", color: "#a5d6a7" },
+    { value: "v_03", label: "Лето", color: "#fff59d" },
+    { value: "v_04", label: "Осень", color: "#ffcc80" },
+    { value: "v_05", label: "Зима", color: "#90caf9" },
+] as const;
+---
+
+<div
+    class="theme-version-switcher {className}"
+    role="group"
+    aria-label="Выбор цветовой схемы"
+>
+    {
+        themes.map((theme) => (
+            <label class="theme-version-switcher__label">
+                <input
+                    type="radio"
+                    name="theme-version"
+                    value={theme.value}
+                    class="theme-version-switcher__input"
+                    checked={currentVersion === theme.value}
+                    aria-label={`Тема ${theme.label}`}
+                />
+                <span
+                    class="theme-version-switcher__box"
+                    style={`background-color: ${theme.color}`}
+                    aria-hidden="true"
+                />
+                <span class="theme-version-switcher__text">{theme.label}</span>
+            </label>
+        ))
+    }
+</div>
+
+<style lang="scss">
+    @use "@styles/utils/focus-visible.scss" as *;
+
+    .theme-version-switcher {
+        //display: flex;
+        //flex-direction: column;
+        //flex-wrap: wrap;
+        //gap: var(--space-sm);
+
+        &__label {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: var(--space-xs);
+            cursor: pointer;
+            transition: opacity var(--transition-timing-default);
+
+            &:hover {
+                opacity: 0.8;
+            }
+        }
+
+        &__input {
+            position: absolute;
+            opacity: 0;
+            width: 0;
+            height: 0;
+
+            &:focus-visible + .theme-version-switcher__box {
+                outline: 2px solid var(--md-sys-color-primary);
+                outline-offset: 2px;
+            }
+
+            &:checked + .theme-version-switcher__box {
+                box-shadow: 0 0 0 3px var(--md-sys-color-primary);
+                transform: scale(1.1);
+            }
+        }
+
+        &__box {
+            width: 32px;
+            height: 32px;
+            border-radius: 50%;
+            border: 2px solid var(--md-sys-color-outline);
+            transition: all 0.3s ease;
+            display: block;
+        }
+
+        &__text {
+            font-size: var(--font-size-body-small);
+            color: var(--md-sys-color-on-surface);
+            text-align: center;
+            line-height: 2;
+        }
+    }
+</style>
+
+<script is:inline>
+    (function () {
+        // ✅ Синхронизация радио-кнопок с текущей темой
+        function syncSwitcher() {
+            const saved = localStorage.getItem("theme");
+            const version = saved ? JSON.parse(saved).version : "v_01";
+            const checked = document.querySelector(
+                `input[name="theme-version"][value="${version}"]`,
+            ) as HTMLInputElement;
+            if (checked) checked.checked = true;
+        }
+
+        // ✅ Обработчик переключения
+        function initSwitcher() {
+            syncSwitcher();
+
+            const inputs = document.querySelectorAll(
+                'input[name="theme-version"]',
+            );
+            inputs.forEach((input) => {
+                input.addEventListener("change", function (e) {
+                    const newVersion = (e.target as HTMLInputElement).value;
+
+                    // Сохраняем версию, режим не трогаем
+                    try {
+                        const saved = localStorage.getItem("theme");
+                        const currentTheme = saved
+                            ? JSON.parse(saved)
+                            : { version: "v_01", mode: "light" };
+                        const newTheme = {
+                            ...currentTheme,
+                            version: newVersion,
+                        };
+                        localStorage.setItem("theme", JSON.stringify(newTheme));
+                    } catch {
+                        localStorage.setItem(
+                            "theme",
+                            JSON.stringify({
+                                version: newVersion,
+                                mode: "light",
+                            }),
+                        );
+                    }
+
+                    // Применяем атрибут
+                    document.documentElement.setAttribute(
+                        "data-theme-version",
+                        newVersion,
+                    );
+                });
+            });
+        }
+
+        // ✅ Инициализация
+        if (document.readyState === "loading") {
+            document.addEventListener("DOMContentLoaded", initSwitcher);
+        } else {
+            initSwitcher();
+        }
+    })();
+</script>

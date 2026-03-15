@@ -1,0 +1,82 @@
+---
+// src/layouts/PagesLayoutTheme.astro
+//import Head from "@components/partials/Head.astro";
+import Footer from "@components/partials/Footer.astro";
+import FooterTheme from "@components/partials/FooterTheme.astro";
+import Header from "@components/partials/Header.astro";
+//import ThemeToggle from "@ui/ThemeToggle.astro";
+import HeadTheme from "@components/partials/HeadTheme.astro";
+import TcV01 from "@components/ui/theme-control/TcV01.astro";
+//import ThemeToggleTheme from "@components/ui/ThemeToggleTheme.astro";
+
+export interface Props {
+    seo?: {
+        title?: string;
+        description?: string;
+        keywords?: string;
+        canonicalUrl?: string;
+        noIndex?: boolean;
+    };
+}
+
+const { seo = {} } = Astro.props;
+---
+
+<!doctype html>
+<html lang="ru" data-theme="light">
+    <head>
+        <HeadTheme {...seo} />
+    </head>
+    <body>
+        <div class="wrapper">
+            <div class="theme-control-wrapper">
+                <TcV01 />
+            </div>
+            <!-- <Header /> -->
+            <main class="page">
+                <slot />
+            </main>
+            <FooterTheme />
+        </div>
+
+        <script>
+            // Импортируем из баррл-файла через алиас @/utils
+            import { initTabs } from "../utils/index.js";
+
+            // Запускаем только после полной загрузки DOM
+            document.addEventListener("DOMContentLoaded", () => {
+                initTabs();
+            });
+        </script>
+    </body>
+</html>
+
+<style lang="scss" is:global>
+    @use "@styles/base/variables.scss" as *;
+
+    h1 {
+        text-align: center;
+        font-size: var(--font-size-display-large);
+    }
+
+    .wrapper {
+        // display: grid;
+        // grid-template-rows: auto 1fr auto;
+    }
+
+    .theme-control-wrapper {
+        padding: var(--space-lg);
+        background-color: var(--md-sys-color-surface);
+        box-shadow: var(--box-shadow-Light-02);
+        border-bottom-left-radius: var(--border-radius-large);
+        border-top-left-radius: var(--border-radius-large);
+        text-align: end;
+        position: fixed;
+        right: 12px;
+        top: 12px;
+    }
+
+    .page {
+        //flex: 1; /* Контент занимает всё свободное пространство */
+    }
+</style>

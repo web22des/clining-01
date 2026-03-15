@@ -1,0 +1,172 @@
+---
+// src/components/ui/ThemeToggleTheme.astro
+//
+//
+// ✅ Работает с mode (light/dark), не трогаем логику
+// ✅ Добавлена синхронизация с версией темы
+
+export const prerender = false;
+
+interface Props {
+    initialTheme?: "light" | "dark";
+}
+
+const { initialTheme = "light" } = Astro.props;
+---
+
+<style lang="scss">
+    @use "@styles/utils/_focus-visible.scss" as *;
+
+    .theme-toggle {
+        position: relative;
+        display: inline-block;
+        width: 60px;
+        height: 30px;
+
+        &__input {
+            opacity: 0;
+            width: 0;
+            height: 0;
+            position: absolute;
+
+            &:focus-visible + .theme-toggle__slider {
+                outline: 2px solid var(--md-sys-color-primary);
+                outline-offset: 3px;
+                box-shadow: 0 0 0 3px rgba(var(--md-sys-color-primary-rgb), 0.3);
+            }
+
+            &:checked + .theme-toggle__slider {
+                background-color: var(--md-sys-color-primary-container);
+
+                &::before {
+                    transform: translateX(30px);
+                    content: "\e9d6"; // Иконка луны
+                    color: var(--md-sys-color-on-primary-container);
+                }
+            }
+        }
+
+        &__slider {
+            position: absolute;
+            cursor: pointer;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background-color: var(--md-sys-color-primary-container);
+            transition: 0.4s;
+            border-radius: 30px;
+            display: flex;
+            align-items: center;
+            padding: 0 5px;
+            box-shadow: var(--box-shadow-Light-01);
+
+            &::before {
+                position: absolute;
+                content: "\e9d4"; // Иконка солнца
+                font-family: "icomoon" !important;
+                height: 24px;
+                width: 24px;
+                left: 3px;
+                bottom: 3px;
+                background-color: transparent;
+                transition: 0.4s;
+                border-radius: 50%;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                font-size: 14px;
+                color: var(--md-sys-color-on-primary-container);
+            }
+        }
+    }
+</style>
+
+<div class="theme-toggle">
+    <input
+        type="checkbox"
+        id="theme-toggle"
+        class="theme-toggle__input"
+        checked={initialTheme === "dark"}
+        aria-label="Переключить светлую/тёмную тему"
+    />
+    <label for="theme-toggle" class="theme-toggle__slider" aria-hidden="true">
+        <span class="visually-hidden">Переключить светлую/тёмную тему</span>
+    </label>
+</div>
+
+<script is:inline>
+    (function () {
+        // ✅ Обновлённая функция с учётом версии темы
+        function syncTheme() {
+            var saved = localStorage.getItem("theme");
+            var systemDark = window.matchMedia(
+                "(prefers-color-scheme: dark)",
+            ).matches;
+
+            var currentMode = "light";
+            if (saved) {
+                try {
+                    var parsed = JSON.parse(saved);
+                    currentMode =
+                        parsed.mode || (systemDark ? "dark" : "light");
+                } catch (e) {
+                    currentMode = systemDark ? "dark" : "light";
+                }
+            } else {
+                currentMode = systemDark ? "dark" : "light";
+            }
+
+            document.documentElement.setAttribute("data-theme", currentMode);
+
+            var toggle = document.getElementById("theme-toggle");
+            if (toggle) {
+                toggle.checked = currentMode === "dark";
+            }
+        }
+
+        syncTheme();
+
+        // ✅ Обработчик переключения режима
+        var toggleEl = document.getElementById("theme-toggle");
+        if (toggleEl) {
+            toggleEl.addEventListener("change", function (e) {
+                var newMode = e.target.checked ? "dark" : "light";
+
+                // ✅ Сохраняем mode, версию не трогаем
+                var saved = localStorage.getItem("theme");
+                var currentTheme = { version: "v_01", mode: "light" };
+
+                if (saved) {
+                    try {
+                        currentTheme = JSON.parse(saved);
+                    } catch (e) {
+                        // Битые данные — берём дефолт
+                    }
+                }
+
+                var newTheme = {
+                    version: currentTheme.version,
+                    mode: newMode,
+                };
+
+                localStorage.setItem("theme", JSON.stringify(newTheme));
+                document.documentElement.setAttribute("data-theme", newMode);
+            });
+        }
+
+        // ✅ Следим за изменениями системной темы (только если нет ручного выбора)
+        var mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+        if (mediaQuery.addEventListener) {
+            mediaQuery.addEventListener("change", function (e) {
+                var saved = localStorage.getItem("theme");
+                if (!saved) {
+                    document.documentElement.setAttribute(
+                        "data-theme",
+                        e.matches ? "dark" : "light",
+                    );
+                }
+            });
+        }
+    })();
+</script>

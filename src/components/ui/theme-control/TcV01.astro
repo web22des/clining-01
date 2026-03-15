@@ -1,0 +1,23 @@
+---
+import ThemeToggleTheme from "../ThemeToggleTheme.astro";
+import ThemeVersionSwitcher from "../ThemeVersionSwitcher.astro";
+
+// src/components/ui/theme-control/TcV01.astro
+---
+
+<div class="tsv01">
+    <div class="tsv01__header">
+        <ThemeToggleTheme />
+    </div>
+    <div class="tsv01__body">
+        <ThemeVersionSwitcher />
+    </div>
+</div>
+
+<style lang="scss">
+    .tsv01 {
+        display: flex;
+        flex-direction: column;
+        gap: var(--space-grid-gap);
+    }
+</style>
