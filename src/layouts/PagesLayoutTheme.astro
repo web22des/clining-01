@@ -1,15 +1,16 @@
 ---
 // src/layouts/PagesLayoutTheme.astro
-//import Head from "@components/partials/Head.astro";
+// ✅ Layout: структура + анимация панели + задержки для вложенных элементов
+// ✅ TcV01: внутренняя логика темы (переключатели)
+
 import Footer from "@components/partials/Footer.astro";
-import FooterTheme from "@components/partials/FooterTheme.astro";
-import Header from "@components/partials/Header.astro";
-//import ThemeToggle from "@ui/ThemeToggle.astro";
 import HeadTheme from "@components/partials/HeadTheme.astro";
 import TcV01 from "@components/ui/theme-control/TcV01.astro";
-//import ThemeToggleTheme from "@components/ui/ThemeToggleTheme.astro";
 
 export interface Props {
+    className?: string;
+    classNameBtn?: string;
+    dataJs?: string;
     seo?: {
         title?: string;
         description?: string;
@@ -19,64 +20,206 @@ export interface Props {
     };
 }
 
-const { seo = {} } = Astro.props;
+const {
+    seo = {},
+    classNameBtn = "_icon-circle-down",
+    dataJs = "theme-control-btn",
+} = Astro.props;
 ---
 
 <!doctype html>
-<html lang="ru" data-theme="light">
+<html lang="ru" data-theme="light" data-theme-version="v_01">
     <head>
         <HeadTheme {...seo} />
     </head>
     <body>
         <div class="wrapper">
             <div class="theme-control-wrapper">
-                <TcV01 />
+                <!-- ✅ Кнопка управления -->
+                <button
+                    data-js={dataJs}
+                    class={classNameBtn}
+                    type="button"
+                    aria-expanded="false"
+                    aria-controls="theme-panel"
+                >
+                    <span class="visually-hidden">Открыть настройки темы</span>
+                </button>
+
+                <!-- ✅ Панель с анимацией -->
+                <div
+                    class="theme-control-wrapper__body"
+                    data-js="theme-panel"
+                    hidden
+                >
+                    <TcV01 />
+                </div>
             </div>
-            <!-- <Header /> -->
+
             <main class="page">
                 <slot />
             </main>
-            <FooterTheme />
+            <Footer />
         </div>
-
-        <script>
-            // Импортируем из баррл-файла через алиас @/utils
-            import { initTabs } from "../utils/index.js";
-
-            // Запускаем только после полной загрузки DOM
-            document.addEventListener("DOMContentLoaded", () => {
-                initTabs();
-            });
-        </script>
     </body>
 </html>
 
 <style lang="scss" is:global>
     @use "@styles/base/variables.scss" as *;
+    @use "@styles/utils/_focus-visible.scss" as *;
 
-    h1 {
-        text-align: center;
-        font-size: var(--font-size-display-large);
-    }
-
-    .wrapper {
-        // display: grid;
-        // grid-template-rows: auto 1fr auto;
-    }
-
+    // =============================================================================
+    // 🔧 АНИМАЦИЯ ПАНЕЛИ
+    // =============================================================================
     .theme-control-wrapper {
         padding: var(--space-lg);
         background-color: var(--md-sys-color-surface);
         box-shadow: var(--box-shadow-Light-02);
-        border-bottom-left-radius: var(--border-radius-large);
-        border-top-left-radius: var(--border-radius-large);
+        border-radius: var(--border-radius-full);
         text-align: end;
         position: fixed;
+        z-index: 100;
         right: 12px;
-        top: 12px;
+        top: 92px;
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        [class*="_icon-"] {
+            font-size: 50px;
+            color: var(--md-sys-color-primary-fixed-dim);
+            line-height: 0;
+            transition: transform 0.3s ease;
+
+            // ✅ Анимация иконки при открытии
+            .theme-control-wrapper__body.is-open + & {
+                transform: rotate(180deg);
+            }
+        }
     }
 
-    .page {
-        //flex: 1; /* Контент занимает всё свободное пространство */
+    // ✅ Панель: анимация появления
+    .theme-control-wrapper__body {
+        // Исходное состояние (скрыто)
+        opacity: 0;
+        visibility: hidden;
+        transform: translateY(-10px) scale(0.98);
+        pointer-events: none;
+        transition:
+            opacity 0.3s ease,
+            transform 0.3s ease,
+            visibility 0.3s ease;
+
+        // ✅ Состояние "открыто" (через класс)
+        &.is-open {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0) scale(1);
+            pointer-events: auto;
+        }
+
+        // ✅ Fallback для hidden (если JS отключён)
+        &[hidden] {
+            display: none;
+        }
+
+        // =============================================================================
+        // ⏱ ЗАДЕРЖКИ ДЛЯ ВЛОЖЕННЫХ ЭЛЕМЕНТОВ (каскадное появление)
+        // =============================================================================
+        // Добавляй класс .animate-delay-N к элементам внутри TcV01.astro
+        // N = 1, 2, 3, 4, 5 (шаг 100ms)
+
+        .animate-delay-1 {
+            transition-delay: 0.1s;
+        }
+        .animate-delay-2 {
+            transition-delay: 0.2s;
+        }
+        .animate-delay-3 {
+            transition-delay: 0.3s;
+        }
+        .animate-delay-4 {
+            transition-delay: 0.4s;
+        }
+        .animate-delay-5 {
+            transition-delay: 0.5s;
+        }
+
+        // ✅ Исходное состояние для вложенных элементов (до открытия)
+        .animate-item {
+            opacity: 0;
+            transform: translateY(10px);
+            transition:
+                opacity 0.3s ease,
+                transform 0.3s ease;
+        }
+
+        // ✅ При открытии панели — вложенные элементы появляются
+        &.is-open .animate-item {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    // ♿ Доступность: отключаем анимацию для prefers-reduced-motion
+    @media (prefers-reduced-motion: reduce) {
+        .theme-control-wrapper__body {
+            transition: none;
+            transform: none;
+        }
+        .theme-control-wrapper [class*="_icon-"] {
+            transition: none;
+        }
+        .theme-control-wrapper__body .animate-item {
+            transition: none;
+            opacity: 1;
+            transform: none;
+        }
+        .theme-control-wrapper__body [class*="animate-delay-"] {
+            transition-delay: 0s;
+        }
     }
 </style>
+
+<script>
+    import { on, findElement } from "@utils/dom";
+
+    // ✅ Длительность анимации (должна совпадать с CSS transition)
+    const ANIMATION_DURATION = 300;
+
+    document.addEventListener("DOMContentLoaded", () => {
+        const panel = findElement<HTMLElement>("theme-panel");
+        const btn = findElement<HTMLButtonElement>("theme-control-btn");
+
+        if (!panel || !btn) {
+            console.warn("⚠️ Panel or button not found");
+            return;
+        }
+
+        on("theme-control-btn", "click", function () {
+            const isOpen = panel.classList.contains("is-open");
+
+            if (isOpen) {
+                // 🔻 ЗАКРЫВАЕМ: убираем класс → ждём анимацию → добавляем hidden
+                panel.classList.remove("is-open");
+                btn.setAttribute("aria-expanded", "false");
+
+                setTimeout(() => {
+                    panel.hidden = true;
+                }, ANIMATION_DURATION);
+            } else {
+                // 🔼 ОТКРЫВАЕМ: убираем hidden → ждём кадр → добавляем класс
+                panel.hidden = false;
+
+                // ✅ requestAnimationFrame гарантирует, что браузер применит hidden=false
+                // перед добавлением класса, чтобы transition сработал корректно
+                requestAnimationFrame(() => {
+                    panel.classList.add("is-open");
+                    btn.setAttribute("aria-expanded", "true");
+                });
+            }
+
+            console.log("🎨 Panel toggled:", !isOpen ? "open" : "closed");
+        });
+    });
+</script>

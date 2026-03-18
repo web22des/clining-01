@@ -171,3 +171,13 @@ const {
         }
     }
 </style>
+
+<script>
+    // Импортируем из баррл-файла через алиас @/utils
+    import { initTabs } from "@utils/index.js";
+
+    // Запускаем только после полной загрузки DOM
+    document.addEventListener("DOMContentLoaded", () => {
+        initTabs();
+    });
+</script>

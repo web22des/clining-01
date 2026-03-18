@@ -1,6 +1,7 @@
 ---
 // src/components/ui/ThemeVersionSwitcher.astro
-
+// Для использования скрипта добавть в <html lang="ru" data-theme="light" data-theme-version="v_01"> - дефолтные значения
+// Для корректной работы проверить в файлах src/styles/themes/v_01/light.scss - наличие html[data-theme-version="v_01"][data-theme="light"]
 // Переключатель версий цветовой схемы (v_01 - v_05)
 
 import type { ThemeVersion } from "@utils/theme";
@@ -111,11 +112,23 @@ const themes = [
         // ✅ Синхронизация радио-кнопок с текущей темой
         function syncSwitcher() {
             const saved = localStorage.getItem("theme");
-            const version = saved ? JSON.parse(saved).version : "v_01";
-            const checked = document.querySelector(
-                `input[name="theme-version"][value="${version}"]`,
-            ) as HTMLInputElement;
-            if (checked) checked.checked = true;
+            let version = "v_01";
+
+            if (saved) {
+                try {
+                    const parsed = JSON.parse(saved);
+                    version = parsed.version || "v_01";
+                } catch (e) {
+                    console.warn("Theme data corrupted");
+                    localStorage.removeItem("theme");
+                }
+            }
+
+            const selector = `input[name="theme-version"][value="${version}"]`;
+            const checked = document.querySelector(selector);
+            if (checked) {
+                checked.checked = true;
+            }
         }
 
         // ✅ Обработчик переключения
@@ -125,19 +138,26 @@ const themes = [
             const inputs = document.querySelectorAll(
                 'input[name="theme-version"]',
             );
-            inputs.forEach((input) => {
-                input.addEventListener("change", function (e) {
-                    const newVersion = (e.target as HTMLInputElement).value;
 
-                    // Сохраняем версию, режим не трогаем
+            inputs.forEach((input) => {
+                input.addEventListener("change", (e) => {
+                    const newVersion = e.target.value;
+
                     try {
                         const saved = localStorage.getItem("theme");
-                        const currentTheme = saved
-                            ? JSON.parse(saved)
-                            : { version: "v_01", mode: "light" };
+                        let currentTheme = { version: "v_01", mode: "light" };
+
+                        if (saved) {
+                            try {
+                                currentTheme = JSON.parse(saved);
+                            } catch {
+                                // Битые данные — берём дефолт
+                            }
+                        }
+
                         const newTheme = {
-                            ...currentTheme,
                             version: newVersion,
+                            mode: currentTheme.mode,
                         };
                         localStorage.setItem("theme", JSON.stringify(newTheme));
                     } catch {
@@ -150,7 +170,6 @@ const themes = [
                         );
                     }
 
-                    // Применяем атрибут
                     document.documentElement.setAttribute(
                         "data-theme-version",
                         newVersion,

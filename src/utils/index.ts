@@ -2,7 +2,7 @@
 
 // Валидация данных
 export { validateUniqueIds } from "./validate-data";
-
+export * from "./dom";
 export { initTabs } from "@utils/tv01";
 
 // Будущие утилиты (пример)

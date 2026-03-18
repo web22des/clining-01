@@ -26,19 +26,19 @@ const basePath = import.meta.env.BASE_URL;
 <!--  -->
 
 <script is:inline>
-    (function () {
+    (() => {
         console.log("🎨 [Switcher] Script loaded");
 
         // ✅ Синхронизация радио-кнопок с текущей темой
-        function syncSwitcher() {
+        const syncSwitcher = () => {
             console.log("🎨 [Switcher] syncSwitcher started");
-            var saved = localStorage.getItem("theme");
-            var version = "v_01";
-            var mode = "light";
+            const saved = localStorage.getItem("theme");
+            let version = "v_01";
+            let mode = "light";
 
             if (saved) {
                 try {
-                    var parsed = JSON.parse(saved);
+                    const parsed = JSON.parse(saved);
                     version = parsed.version || "v_01";
                     mode = parsed.mode || "light";
                     console.log("🎨 [Switcher] Parsed:", parsed);
@@ -48,44 +48,43 @@ const basePath = import.meta.env.BASE_URL;
                 }
             }
 
-            var selector =
-                'input[name="theme-version"][value="' + version + '"]';
-            var checked = document.querySelector(selector);
+            const selector = `input[name="theme-version"][value="${version}"]`;
+            const checked = document.querySelector(selector);
             console.log("🎨 [Switcher] Found checkbox:", checked);
             if (checked) {
                 checked.checked = true;
             }
-        }
+        };
 
         // ✅ Обработчик переключения
-        function initSwitcher() {
+        const initSwitcher = () => {
             console.log("🎨 [Switcher] initSwitcher started");
-            var inputs = document.querySelectorAll(
+            const inputs = document.querySelectorAll(
                 'input[name="theme-version"]',
             );
             console.log("🎨 [Switcher] Found inputs:", inputs.length);
 
-            for (var i = 0; i < inputs.length; i++) {
-                inputs[i].addEventListener("change", function (e) {
+            inputs.forEach((input) => {
+                input.addEventListener("change", (e) => {
                     console.log("🎨 [Switcher] CHANGE EVENT FIRED!");
-                    var newVersion = e.target.value;
+                    const newVersion = e.target.value;
                     console.log("🎨 [Switcher] New version:", newVersion);
 
-                    var saved = localStorage.getItem("theme");
-                    var currentTheme = { version: "v_01", mode: "light" };
+                    const saved = localStorage.getItem("theme");
+                    let currentTheme = { version: "v_01", mode: "light" };
 
                     if (saved) {
                         try {
                             currentTheme = JSON.parse(saved);
-                        } catch (e) {
+                        } catch (err) {
                             console.warn(
                                 "🎨 [Switcher] Parse error on click:",
-                                e,
+                                err,
                             );
                         }
                     }
 
-                    var newTheme = {
+                    const newTheme = {
                         version: newVersion,
                         mode: currentTheme.mode,
                     };
@@ -95,6 +94,7 @@ const basePath = import.meta.env.BASE_URL;
                         newTheme,
                     );
 
+                    // ✅ Применяем ОБА атрибута (обязательно!)
                     document.documentElement.setAttribute(
                         "data-theme-version",
                         newVersion,
@@ -105,12 +105,12 @@ const basePath = import.meta.env.BASE_URL;
                     );
                     console.log("🎨 [Switcher] Attributes set on html");
                 });
-            }
-        }
+            });
+        };
 
         // ✅ Инициализация
         if (document.readyState === "loading") {
-            document.addEventListener("DOMContentLoaded", function () {
+            document.addEventListener("DOMContentLoaded", () => {
                 console.log("🎨 [Switcher] DOMContentLoaded");
                 syncSwitcher();
                 initSwitcher();
