@@ -1,33 +1,28 @@
-//
 // src/utils/dom.ts
 // 📌 Базовые утилиты для работы с DOM (переиспользуемые)
-/**
- * Как использовать -
- * Переключатель темы - on('theme-toggle', 'click', () => { ... })
- * Анимация заголовка - onIntersect('hero-title', (el) => el.classList.add('is-visible'))
- * Поиск элемента const btn = findElement<HTMLButtonElement>('btn')
- */
 
 /**
- * Найти элемент по data-js атрибуту
+ * Найти элемент по data-js атрибуту (Один элемент)
  * @param selector - значение data-js (kebab-case)
  * @param parent - контекст поиска (по умолчанию document)
  */
-export function findElement<T extends HTMLElement = HTMLElement>(
+export function findElement(
     selector: string,
     parent: Document | HTMLElement = document,
-): T | null {
-    return parent.querySelector(`[data-js="${selector}"]`) as T | null;
+): Element | null {
+    return parent.querySelector(`[data-js="${selector}"]`);
 }
 
 /**
- * Найти все элементы по data-js атрибуту
+ * Найти все элементы по data-js атрибуту (Группа)
+ * @param selector - значение data-js
+ * @param parent - контекст поиска
  */
-export function findElements<T extends HTMLElement = HTMLElement>(
+export function findElements(
     selector: string,
     parent: Document | HTMLElement = document,
-): NodeListOf<T> {
-    return parent.querySelectorAll(`[data-js="${selector}"]`) as NodeListOf<T>;
+): NodeListOf<Element> {
+    return parent.querySelectorAll(`[data-js="${selector}"]`);
 }
 
 /**
@@ -36,24 +31,26 @@ export function findElements<T extends HTMLElement = HTMLElement>(
  * @param event - тип события ('click', 'change', etc.)
  * @param handler - функция-обработчик
  */
-export function on<T extends HTMLElement>(
+export function on(
     selector: string,
     event: string,
-    handler: (this: T, e: Event) => void,
+    handler: (this: Element, e: Event) => void,
     options?: boolean | AddEventListenerOptions,
 ): void {
-    const el = findElement<T>(selector);
+    const el = findElement(selector);
     if (el) {
         el.addEventListener(event, handler, options);
     } else {
+        // ⚠️ Предупреждение в консоль для разработчика, но не ломает сайт
         console.warn(`⚠️ Element [data-js="${selector}"] not found`);
     }
 }
 
 /**
  * Отследить появление элемента в области видимости (для анимаций)
+ * ✅ Обновлено: Работает с одиночными элементами и группами
  * @param selector - значение data-js
- * @param callback - функция, которая вызовётся при появлении
+ * @param callback - функция, которая вызовётся при появлении (передает сам элемент)
  * @param threshold - порог видимости (0.1 = 10% элемента)
  */
 export function onIntersect(
@@ -61,18 +58,30 @@ export function onIntersect(
     callback: (el: Element) => void,
     threshold: number = 0.1,
 ): void {
-    const el = findElement(selector);
-    if (!el) return;
+    // ✅ Используем findElements для поддержки групп (даже если элемент один)
+    const elements = findElements(selector);
 
+    // ✅ Проверка безопасности: если элементов нет, выходим
+    if (elements.length === 0) {
+        console.warn(`⚠️ No elements found for [data-js="${selector}"]`);
+        return;
+    }
+
+    // ✅ Создаем ОДИН наблюдатель для всех элементов (оптимизация производительности)
     const observer = new IntersectionObserver(
-        ([entry]) => {
-            if (entry.isIntersecting) {
-                callback(el);
-                observer.unobserve(el); // отключаем после срабатывания
-            }
+        (entries) => {
+            entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                    // ✅ Передаем конкретный элемент (entry.target) в callback
+                    callback(entry.target);
+                    // ✅ Перестаем следить за этим элементом после анимации (чтобы не повторялась)
+                    observer.unobserve(entry.target);
+                }
+            });
         },
         { threshold },
     );
 
-    observer.observe(el);
+    // ✅ Подключаем наблюдатель ко всем найденным элементам
+    elements.forEach((el) => observer.observe(el));
 }

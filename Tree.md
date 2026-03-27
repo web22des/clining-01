@@ -9,7 +9,6 @@
  ┃ ┃ ┃ ┣ 📜01.jpg
  ┃ ┃ ┃ ┣ 📜02.jpg
  ┃ ┃ ┃ ┗ 📜03.jpg
- ┃ ┃ ┣ 📂test
  ┃ ┃ ┗ 📜test-01.jpg
  ┃ ┣ 📂temp
  ┃ ┃ ┣ 📂avatars
@@ -18,7 +17,7 @@
  ┃ ┃ ┃ ┣ 📜av-03.png
  ┃ ┃ ┃ ┣ 📜av-04.png
  ┃ ┃ ┃ ┗ 📜av-05.png
- ┃ ┃ ┣ 📂images
+ ┃ ┃ ┗ 📂images
  ┃ ┃ ┃ ┣ 📜360-01.jpg
  ┃ ┃ ┃ ┣ 📜360-02.jpg
  ┃ ┃ ┃ ┣ 📜360х168-01.jpg
@@ -29,7 +28,6 @@
  ┃ ┃ ┃ ┣ 📜552x360-04.jpg
  ┃ ┃ ┃ ┣ 📜552x360-05.jpg
  ┃ ┃ ┃ ┗ 📜rutube.jpg
- ┃ ┃ ┗ 📂logo
  ┃ ┣ 📜blog-placeholder-1.jpg
  ┃ ┣ 📜blog-placeholder-2.jpg
  ┃ ┣ 📜blog-placeholder-3.jpg
@@ -46,7 +44,9 @@
  ┣ 📂components
  ┃ ┣ 📂partials
  ┃ ┃ ┣ 📜Footer.astro
+ ┃ ┃ ┣ 📜FooterTheme.astro
  ┃ ┃ ┣ 📜Head.astro
+ ┃ ┃ ┣ 📜HeadTheme.astro
  ┃ ┃ ┗ 📜Header.astro
  ┃ ┣ 📂sections
  ┃ ┃ ┣ 📂SectionVar02
@@ -101,9 +101,10 @@
  ┃ ┃ ┃ ┣ 📜Cv06.astro
  ┃ ┃ ┃ ┗ 📜Cv100.astro
  ┃ ┃ ┣ 📂tabs
- ┃ ┃ ┃ ┣ 📂test
  ┃ ┃ ┃ ┗ 📂tv01
  ┃ ┃ ┃ ┃ ┗ 📜Tv01.astro
+ ┃ ┃ ┣ 📂theme-control
+ ┃ ┃ ┃ ┗ 📜TcV01.astro
  ┃ ┃ ┣ 📂title
  ┃ ┃ ┃ ┣ 📜SectionTitleVar01.astro
  ┃ ┃ ┃ ┗ 📜SectionTitleVar02.astro
@@ -114,16 +115,15 @@
  ┃ ┃ ┣ 📜SocialContact.astro
  ┃ ┃ ┣ 📜ThemeToggle.astro
  ┃ ┃ ┣ 📜ThemeToggleTheme.astro
- ┃ ┃ ┗ 📜ThemeVersionSelector.astro
+ ┃ ┃ ┗ 📜ThemeVersionSwitcher.astro
  ┃ ┗ 📜README.md
  ┣ 📂content
- ┃ ┣ 📂blog
+ ┃ ┗ 📂blog
  ┃ ┃ ┣ 📜first-post.md
  ┃ ┃ ┣ 📜markdown-style-guide.md
  ┃ ┃ ┣ 📜programming-post.md
  ┃ ┃ ┣ 📜second-post.md
  ┃ ┃ ┗ 📜third-post.md
- ┃ ┗ 📂test
  ┣ 📂data
  ┃ ┣ 📂sections
  ┃ ┃ ┣ 📂SectionFull
@@ -143,7 +143,6 @@
  ┃ ┃ ┣ 📂vizitka
  ┃ ┃ ┃ ┗ 📜visitkaData.ts
  ┃ ┃ ┗ 📜StaVar02.ts
- ┃ ┣ 📂test
  ┃ ┣ 📜README.md
  ┃ ┣ 📜navigation.ts
  ┃ ┗ 📜site-config.ts
@@ -151,14 +150,16 @@
  ┃ ┗ 📜index.ts
  ┣ 📂layouts
  ┃ ┣ 📜BlogPost.astro
- ┃ ┗ 📜PagesLayout.astro
+ ┃ ┣ 📜PagesLayout.astro
+ ┃ ┗ 📜PagesLayoutTheme.astro
  ┣ 📂pages
  ┃ ┣ 📂blog
  ┃ ┃ ┣ 📜[...slug].astro
  ┃ ┃ ┗ 📜index.astro
  ┃ ┣ 📜catalog.astro
  ┃ ┣ 📜contacts.astro
- ┃ ┗ 📜index.astro
+ ┃ ┣ 📜index.astro
+ ┃ ┗ 📜test-theme.astro
  ┣ 📂styles
  ┃ ┣ 📂base
  ┃ ┃ ┣ 📂mixins
@@ -172,6 +173,7 @@
  ┃ ┃ ┃ ┣ 📜_utilites.scss
  ┃ ┃ ┃ ┣ 📜adaptiveValue.scss
  ┃ ┃ ┃ ┗ 📜grid.scss
+ ┃ ┃ ┣ 📜animations.scss
  ┃ ┃ ┣ 📜base.scss
  ┃ ┃ ┣ 📜button.scss
  ┃ ┃ ┣ 📜common.scss
@@ -193,25 +195,29 @@
  ┃ ┃ ┃ ┣ 📜dark.scss
  ┃ ┃ ┃ ┗ 📜light.scss
  ┃ ┃ ┣ 📂v_02
- ┃ ┃ ┃ ┣ 📜dark.css
- ┃ ┃ ┃ ┗ 📜light.css
+ ┃ ┃ ┃ ┣ 📜dark.scss
+ ┃ ┃ ┃ ┗ 📜light.scss
  ┃ ┃ ┣ 📂v_03
- ┃ ┃ ┃ ┣ 📜dark.css
- ┃ ┃ ┃ ┗ 📜light.css
+ ┃ ┃ ┃ ┣ 📜dark.scss
+ ┃ ┃ ┃ ┗ 📜light.scss
  ┃ ┃ ┣ 📂v_04
- ┃ ┃ ┃ ┣ 📜dark.css
- ┃ ┃ ┃ ┗ 📜light.css
+ ┃ ┃ ┃ ┣ 📜dark.scss
+ ┃ ┃ ┃ ┗ 📜light.scss
  ┃ ┃ ┗ 📂v_05
- ┃ ┃ ┃ ┣ 📜dark.css
- ┃ ┃ ┃ ┗ 📜light.css
+ ┃ ┃ ┃ ┣ 📜dark.scss
+ ┃ ┃ ┃ ┗ 📜light.scss
  ┃ ┣ 📂utils
  ┃ ┃ ┗ 📜_focus-visible.scss
  ┃ ┗ 📜global.scss
  ┣ 📂utils
+ ┃ ┣ 📜dom.ts
+ ┃ ┣ 📜domDocs.md
  ┃ ┣ 📜index.ts
  ┃ ┣ 📜theme.ts
  ┃ ┣ 📜tv01.ts
  ┃ ┗ 📜validate-data.ts
  ┣ 📜consts.ts
  ┗ 📜content.config.ts
+
+
 ```

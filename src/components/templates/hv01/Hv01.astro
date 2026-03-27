@@ -43,7 +43,7 @@ const {
 } = Astro.props;
 ---
 
-<div class="hv01">
+<div class="hv01 animate">
     <div class="hv01__container">
         <h1>{heroTitle}</h1>
         <h2>{heroSubtitle}</h2>
@@ -74,7 +74,7 @@ const {
             border-radius: var(--border-radius-large);
             padding: 32px 8px;
             position: relative;
-            margin-bottom: var(--space-xxxl);
+            //margin-bottom: var(--space-xxxl);
             //767px и более
             @media (min-width: $tablet-small) {
                 max-height: 632px;

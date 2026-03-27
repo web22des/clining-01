@@ -1,160 +1,68 @@
-// src/styles/base/animations.scss
-// 📌 Переиспользуемые классы анимаций для секций и карточек
-// Использование: добавить класс .animate-fade-in к элементу
+/* src/styles/base/animations.scss */
 
-// =============================================================================
-// 🔧 БАЗОВЫЕ КЛАССЫ (состояния)
-// =============================================================================
-
-/**
- * Исходное состояние (невидимо)
- * Добавлять к элементу по умолчанию
+/* 
+ * 📌 Базовые настройки анимации появления 
+ * Вынесены в переменные для гибкости
  */
-.animate-hidden {
-    opacity: 0;
-    visibility: hidden;
-    transform: translateY(20px);
-    will-change: opacity, transform;
+:root {
+    --anim-duration: 0.6s;
+    --anim-distance: 30px;
+    --anim-easing: cubic-bezier(
+        0.25,
+        0.46,
+        0.45,
+        0.94
+    ); /* Плавное замедление */
 }
 
-/**
- * Конечное состояние (видимо)
- * Добавлять через JS при появлении в области видимости
+/* 
+ * 📌 Базовый класс .js-animate 
+ * Скрывает элемент до начала анимации 
  */
-.animate-visible {
-    opacity: 1;
-    visibility: visible;
-    transform: translateY(0);
+.js-animate {
+    opacity: 0;
+    will-change: opacity, transform; /* Подсказка браузеру для оптимизации */
     transition:
-        opacity 0.6s ease,
-        transform 0.6s ease;
+        opacity var(--anim-duration) var(--anim-easing),
+        transform var(--anim-duration) var(--anim-easing);
 }
 
-// =============================================================================
-// 🎬 ВАРИАНТЫ АНИМАЦИЙ (модификаторы)
-// =============================================================================
-
-/**
- * Появление снизу (default)
- * Для секций и заголовков
+/* 
+ * 📌 Состояние видимости (добавляется через JS) 
  */
-.animate-fade-up {
-    @extend .animate-hidden;
-
-    &.animate-visible {
-        @extend .animate-visible;
-    }
+.js-animate.is-visible {
+    opacity: 1;
+    transform: translate3d(0, 0, 0);
 }
 
-/**
- * Появление сверху
- * Для выпадающих элементов
+/* 
+ * 📌 Направления (Модификаторы) 
+ * Задают начальную позицию сдвига
  */
-.animate-fade-down {
-    @extend .animate-hidden;
-    transform: translateY(-20px);
-
-    &.animate-visible {
-        @extend .animate-visible;
-    }
+.js-animate--up {
+    transform: translate3d(0, var(--anim-distance), 0);
 }
 
-/**
- * Появление слева
- * Для карточек в сетке
- */
-.animate-fade-left {
-    @extend .animate-hidden;
-    transform: translateX(-30px);
-
-    &.animate-visible {
-        @extend .animate-visible;
-    }
+.js-animate--down {
+    transform: translate3d(0, calc(var(--anim-distance) * -1), 0);
 }
 
-/**
- * Появление справа
- * Для карточек в сетке
- */
-.animate-fade-right {
-    @extend .animate-hidden;
-    transform: translateX(30px);
-
-    &.animate-visible {
-        @extend .animate-visible;
-    }
+.js-animate--left {
+    transform: translate3d(var(--anim-distance), 0, 0);
 }
 
-/**
- * Появление с увеличением (scale)
- * Для изображений и карточек
- */
-.animate-zoom-in {
-    opacity: 0;
-    transform: scale(0.95);
-    will-change: opacity, transform;
-
-    &.animate-visible {
-        opacity: 1;
-        transform: scale(1);
-        transition:
-            opacity 0.6s ease,
-            transform 0.6s ease;
-    }
+.js-animate--right {
+    transform: translate3d(calc(var(--anim-distance) * -1), 0, 0);
 }
 
-// =============================================================================
-// ⏱ ЗАДЕРЖКИ (для последовательного появления)
-// =============================================================================
-
-/**
- * Задержка для элементов в сетке
- * Использовать с data-index или вручную
- */
-.animate-delay-1 {
-    transition-delay: 0.1s;
-}
-.animate-delay-2 {
-    transition-delay: 0.2s;
-}
-.animate-delay-3 {
-    transition-delay: 0.3s;
-}
-.animate-delay-4 {
-    transition-delay: 0.4s;
-}
-.animate-delay-5 {
-    transition-delay: 0.5s;
-}
-
-// =============================================================================
-// ♿ ДОСТУПНОСТЬ (методичка раздел "Доступность")
-// =============================================================================
-
-/**
- * Отключаем анимацию для пользователей с prefers-reduced-motion
- * Обязательно по методичке (a11y)
+/* 
+ * 📌 Доступность (a11y) 
+ * Если пользователь отключил анимации в системе — убираем движение
  */
 @media (prefers-reduced-motion: reduce) {
-    .animate-hidden,
-    .animate-visible,
-    .animate-fade-up,
-    .animate-fade-down,
-    .animate-fade-left,
-    .animate-fade-right,
-    .animate-zoom-in {
-        opacity: 1;
-        visibility: visible;
-        transform: none;
+    .js-animate {
         transition: none;
-        will-change: auto;
-    }
-
-    .animate-delay-1,
-    .animate-delay-2,
-    .animate-delay-3,
-    .animate-delay-4,
-    .animate-delay-5 {
-        transition-delay: 0s;
+        opacity: 1;
+        transform: none;
     }
 }

@@ -182,7 +182,7 @@ const {
 </style>
 
 <script>
-    import { on, findElement } from "@utils/dom";
+    import { on, findElement, onIntersect } from "@utils/dom";
 
     // ✅ Длительность анимации (должна совпадать с CSS transition)
     const ANIMATION_DURATION = 300;
@@ -221,5 +221,7 @@ const {
 
             console.log("🎨 Panel toggled:", !isOpen ? "open" : "closed");
         });
+
+        onIntersect("animate", (el) => el.classList.add("is-visible"));
     });
 </script>
