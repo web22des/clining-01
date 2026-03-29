@@ -8,6 +8,7 @@
             "@assets/*": ["./src/assets/*"],
             "@components/*": ["./src/components/*"],
             "@sections/*": ["./src/components/sections/*"],
+            "@templates/*": ["./src/components/templates/*"],
             "@ui/*": ["./src/components/ui/*"],
             "@content/*": ["./src/content/*"],
             "@layouts/*": ["./src/layouts/*"],
